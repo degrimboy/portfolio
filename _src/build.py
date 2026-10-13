@@ -421,6 +421,7 @@ def farmville_body(p):
       <h2>Results</h2>
       {bullets(["All-time high of <strong>40M</strong> monthly active users",
                 "Grew daily active users by <strong>300,000</strong> through content and optimisation",
+                "Introduced the first rooster in FarmVille's history: the Amazing Rooster, leader of the farm animals",
                 "Zynga Green Beret Award for that growth, February 2016",
                 "Zynga Samurai Award for transitioning FarmVille 2 to India, December 2015"])}
     </section>
@@ -430,7 +431,7 @@ def farmville_body(p):
     </section>
     <section class="block" aria-labelledby="rooster-title">
       <h2 id="rooster-title">The Amazing Rooster</h2>
-      <p class="muted" style="max-width:62ch">A rooster I introduced into FarmVille 2, shown in the official trailer and in a player's gameplay video.</p>
+      <div class="prose"><p>FarmVille had never had a rooster until I introduced one. He was the first in the game's history, and he joined the farm as the leader of its animals.</p><p>The official trailer introduced him to players, and the gameplay video follows a player hunting for Rooster Eggs.</p></div>
       <div class="videos">
         {video("3iTk1hW5USY", "Get the Amazing Rooster! (FarmVille 2)", "Official trailer · FarmVille 2")}
         {video("jzISFSoFQ7I", "FarmVille 2 ep. 128: The hunt for Rooster Eggs", "Gameplay · Player video by Gao AsaurusG")}
