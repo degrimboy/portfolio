@@ -97,3 +97,7 @@ a.band:hover .btn{border-color:var(--accent);color:var(--accent)}
 .yt:hover .yt-play::after,.yt:focus-visible .yt-play::after{border-left-color:#06110e}
 @media (max-width:700px){.videos{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:reduce){.yt img{transition:none}}
+.steps.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.steps strong{font-family:var(--display);font-weight:500;font-size:var(--s1)}
+.steps span{color:var(--muted)}
+@media (max-width:900px){.steps.three{grid-template-columns:minmax(0,1fr)}.steps.three li{border-bottom:1px solid var(--line)}.steps.three li:last-child{border-bottom:0}}
