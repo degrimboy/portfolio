@@ -369,3 +369,12 @@ a.band:hover .btn{border-color:var(--accent);color:var(--accent)}
 .steps strong{font-family:var(--display);font-weight:500;font-size:var(--s1)}
 .steps span{color:var(--muted)}
 @media (max-width:900px){.steps.three{grid-template-columns:minmax(0,1fr)}.steps.three li{border-bottom:1px solid var(--line)}.steps.three li:last-child{border-bottom:0}}
+.stage{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,5vw,64px);align-items:center}
+.stage.flip{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+.stage.flip .shot{order:2}
+.stage h3{font-size:var(--s3);letter-spacing:-.02em}
+.shot{margin:0;min-width:0}
+.shot img{width:100%;border-radius:16px;border:1px solid var(--line)}
+.shot.coop{display:grid;place-items:center;background:var(--surface);border-radius:20px;padding:clamp(20px,4vw,40px)}
+.shot.coop img{max-width:371px;border:0;border-radius:12px}
+@media (max-width:900px){.stage,.stage.flip{grid-template-columns:minmax(0,1fr)}.stage.flip .shot{order:0}}

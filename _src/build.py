@@ -434,21 +434,66 @@ def farmville_body(p):
         <div class="block">
           <span class="label">Feature case study</span>
           <h2 id="rooster-title">The first rooster in FarmVille</h2>
+          {facts([("Event", "Rooster Coop, an Adoption Quest"), ("Live", "14 June – 15 July 2016"), ("Stages", "Collection, Hatching, Feeding"), ("Reward", "The Amazing Rooster")])}
         </div>
         <div class="prose">
           <p>Every FarmVille farm had its hens, its cows and its sheep. In all the years of the game, not one had ever had a rooster.</p>
-          <p>I introduced the first: the Amazing Rooster. He wasn't one more animal for the pen. He was the leader of the farm animals, and he earned the title the way a good leader does, by looking after everyone else.</p>
-          <p>A farm's day is full of small chores. Trees and groves wait to be watered, and chickens wait to be fed. The rooster takes on both.</p>
+          <p>I introduced the first: the Amazing Rooster, leader of the farm animals. He wasn't handed out. He arrived in June 2016 through the Rooster Coop, a month-long Adoption Quest, and players had to raise him themselves, from egg to chick to rooster, before time ran out.</p>
+          <p>Each of the three stages leaned on a different part of the farm. Raising animals came first, then harvesting, then crafting, so the whole farm played a part in bringing him home.</p>
         </div>
       </div>
-      <div class="block">
-        <h3 class="col-head" style="margin-bottom:0">His life on the farm</h3>
-        <ol class="steps three">
-          <li><b>01</b><strong>Raised from a chick</strong><span>He starts small. Players raise a rooster chick in the Rooster Coop until he's ready to take charge.</span></li>
-          <li><b>02</b><strong>Keeper of the orchard</strong><span>His first job is the trees. He waters your trees and groves, for a set number of uses.</span></li>
-          <li><b>03</b><strong>Leader of the flock</strong><span>When his watering uses run out, he takes up a daily duty. One click, and he feeds every adult chicken on your main farm, once every 24 hours. Chickens kept in the Animal Barn wait their turn.</span></li>
-        </ol>
+
+      <div class="stage">
+        <figure class="shot">{img(p, "fv-rooster-collection", "Rooster Coop, Collection stage: five baby chickens to feed with Baby Bottles, and an egg tray filling up toward a Rooster egg", cls="zoom", sizes="(max-width: 900px) 100vw, 58vw")}</figure>
+        <div class="block">
+          <span class="label">Stage 1 · Collection</span>
+          <h3>It starts with the hens</h3>
+          <div class="prose">
+            <p>Players raise baby chickens five at a time, feeding each one Baby Bottles until it grows up. Some need one bottle, some need five, and the hungrier chicks pay back more.</p>
+            <p>Every chicken that reaches adulthood drops a prize, such as Speed-Grow, Fertilizer, Water or Super Feed, and lays a special egg. Nine special eggs earn a Rooster egg to hatch.</p>
+          </div>
+        </div>
       </div>
+
+      <div class="stage flip">
+        <figure class="shot">{img(p, "fv-rooster-hatching", "Rooster Coop, Hatching stage: a hen on a straw grid, her egg a few squares away, and a tuning fork meter at 0 of 1,500", cls="zoom", sizes="(max-width: 900px) 100vw, 58vw")}</figure>
+        <div class="block">
+          <span class="label">Stage 2 · Hatching</span>
+          <h3>Bringing the hen to her egg</h3>
+          <div class="prose">
+            <p>A Rooster egg needs its mother. The hen has to be coaxed across the coop to it, and the one thing that moves her is worms.</p>
+            <p>Players fill a tuning fork by harvesting crops and raising and feeding animals. When the fork is full, it charms the worms out of the ground and the hen steps closer. When she reaches the egg, it hatches.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <figure class="shot">{img(p, "fv-rooster-feeding", "Rooster Coop, Feeding stage: the rooster chick beside a grain bucket at 6 of 300, with six tasks for crafting and harvesting", cls="zoom", sizes="(max-width: 900px) 100vw, 58vw")}</figure>
+        <div class="block">
+          <span class="label">Stage 3 · Feeding</span>
+          <h3>Raising the chick</h3>
+          <div class="prose">
+            <p>The chick is hungry, and it takes 300 Rooster Grain to raise him. Players earn it from a board of six tasks: watering, fertilizing and harvesting crops, crafting items, and asking friends for help.</p>
+            <p>This was the longest stretch of the quest. Some tasks asked for 98 crafts or a couple of hundred crops, and seeing them through was what turned a chick into a leader.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage flip">
+        <figure class="shot coop">{img(p, "fv-rooster-coop", "The finished Rooster Coop on a farm: a blue and white coop with a fenced yard", cls="zoom", sizes="(max-width: 900px) 100vw, 371px")}</figure>
+        <div class="block">
+          <span class="label">The reward</span>
+          <h3>The leader of the farm</h3>
+          <div class="prose">
+            <p>When the last of the grain is in, the chick grows into the Amazing Rooster and takes his place in the coop. Then he gets to work.</p>
+          </div>
+          {bullets(["He raises the farm's water capacity by <strong>10</strong>, from 30 to 40, for <strong>28 days</strong>",
+                    "He waters your trees and groves",
+                    "When his watering uses run out, one click has him feed every adult chicken on your main farm, once every <strong>24 hours</strong>",
+                    "Players who wanted him to stay longer could extend his visit for 15 Farmbucks"])}
+        </div>
+      </div>
+
       <div class="cols">
         <h3 class="col-head">The launch</h3>
         <div class="prose"><p>Zynga announced him with a trailer, "Get the Amazing Rooster!" Before long, players were filming their own hunts for Rooster Eggs.</p></div>
