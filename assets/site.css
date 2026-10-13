@@ -352,3 +352,16 @@ dialog.lb p{color:var(--muted);text-align:center;margin-top:10px;font-size:var(-
 a.band{color:inherit}
 a.band:hover .btn{border-color:var(--accent);color:var(--accent)}
 .foot-links a[href^="mailto"]{text-transform:none;letter-spacing:.02em}
+.videos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,32px)}
+.video{margin:0;display:grid;gap:12px;min-width:0}
+.video figcaption{display:grid;gap:4px}
+.video figcaption b{font-weight:500;font-family:var(--display);font-size:var(--s1)}
+.yt,.video iframe{position:relative;display:block;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:var(--surface);border:0}
+.yt img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.yt:hover img{transform:scale(1.03)}
+.yt-play{position:absolute;left:50%;top:50%;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:50%;background:color-mix(in srgb, var(--bg) 70%, transparent);border:1px solid var(--accent);backdrop-filter:blur(4px);transition:background .2s}
+.yt-play::after{content:"";position:absolute;left:27px;top:21px;border-style:solid;border-width:13px 0 13px 21px;border-color:transparent transparent transparent var(--accent)}
+.yt:hover .yt-play,.yt:focus-visible .yt-play{background:var(--accent)}
+.yt:hover .yt-play::after,.yt:focus-visible .yt-play::after{border-left-color:#06110e}
+@media (max-width:700px){.videos{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){.yt img{transition:none}}

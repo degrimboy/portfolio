@@ -73,6 +73,16 @@ def play(links):
     a = "".join(f'<a href="{u}" target="_blank" rel="noopener">{t}<span class="visually-hidden"> (opens in a new tab)</span><span aria-hidden="true">↗</span></a>' for t, u in links)
     return f'<div class="play" aria-label="Where to play">{a}</div>'
 
+def video(vid, title, meta):
+    # Thumbnail first; the YouTube player loads only when clicked (keeps pages fast). Without JS it opens YouTube.
+    return f'''<figure class="video">
+          <a class="yt" href="https://www.youtube.com/watch?v={vid}" data-yt="{vid}" data-title="{esc(title)}" target="_blank" rel="noopener">
+            <img src="https://i.ytimg.com/vi/{vid}/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+            <span class="yt-play" aria-hidden="true"></span><span class="visually-hidden">Play video: {esc(title)}</span>
+          </a>
+          <figcaption><b>{esc(title)}</b><span class="meta">{meta}</span></figcaption>
+        </figure>'''
+
 def facts(rows):
     return '<dl class="facts">' + "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in rows) + "</dl>"
 
@@ -415,6 +425,14 @@ def farmville_body(p):
     <section class="cols">
       <h2>The work</h2>
       <div class="prose"><p>Joined the core team that transitioned FarmVille 2 from Zynga's San Francisco studio to India.</p><p>Ran the content team and defined a five-year product vision for the game.</p></div>
+    </section>
+    <section class="block" aria-labelledby="rooster-title">
+      <h2 id="rooster-title">The Amazing Rooster</h2>
+      <p class="muted" style="max-width:62ch">A rooster I introduced into FarmVille 2, shown in the official trailer and in a player's gameplay video.</p>
+      <div class="videos">
+        {video("3iTk1hW5USY", "Get the Amazing Rooster! (FarmVille 2)", "Official trailer · FarmVille 2")}
+        {video("jzISFSoFQ7I", "FarmVille 2 ep. 128: The hunt for Rooster Eggs", "Gameplay · Player video by Gao AsaurusG")}
+      </div>
     </section>
   </div>
   {next_links(p, GAMES, "games")}'''

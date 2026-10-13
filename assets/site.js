@@ -56,4 +56,19 @@
   });
   document.getElementById('lbClose').addEventListener('click', function(){ lb.close(); });
   lb.addEventListener('click', function(e){ if(e.target === lb) lb.close(); });
+
+  // YouTube: swap the thumbnail for the player on click
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a.yt');
+    if(!a) return;
+    e.preventDefault();
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + a.dataset.yt + '?autoplay=1&rel=0';
+    f.title = a.dataset.title || 'YouTube video';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    f.allowFullscreen = true;
+    f.setAttribute('loading','lazy');
+    a.replaceWith(f);
+    f.focus();
+  });
 })();
