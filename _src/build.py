@@ -273,13 +273,6 @@ def home_body(p):
     </div>
   </section>
 
-  <section class="now" aria-label="Current work">
-    <div class="wrap">
-      <span class="label">Now</span>
-      <p>Building <i>Jungle Nama</i>, a videogame adaptation of the graphic verse novel by Amitav Ghosh.<small>CEO and co-founder of Barking Deer Entertainment, and Product Manager at Dentira.</small></p>
-    </div>
-  </section>
-
   <section class="section" aria-labelledby="work-title">
     <div class="wrap">
       <div class="section-head">
