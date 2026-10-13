@@ -219,6 +219,7 @@ def render(page):
 GAMES = [  # order also drives the previous / next links
     ("bingo-bash", "Bingo Bash"), ("farmville-2", "FarmVille 2"), ("teen-patti-gold", "Teen Patti Gold"),
     ("dr-nero", "The Curious Case of Dr Nero"), ("gameloft", "Gameloft"),
+    ("stellar-forever", "Stellar Forever"),
 ]
 PRODUCTS = [("recycled-earth", "Recycled Earth"), ("meghalayan-age", "Meghalayan Age")]
 
@@ -356,10 +357,11 @@ def games_body(p):
             <p>A mobile puzzle game launched as in-house IP, reaching 250,000 downloads in three months. Game Producer, on Android and iOS.</p>
           </article>
           <article class="card">
-            <div class="blob">{img(p, "stellar", "Stellar Forever: the heroine fights a giant Octosaurus Rex", cls="zoom", sizes="(max-width: 900px) 100vw, 33vw")}</div>
+            <a href="{L(p, "games/stellar-forever/")}" tabindex="-1" aria-hidden="true"><div class="blob">{img(p, "stellar", "Stellar Forever: the heroine fights a giant Octosaurus Rex", sizes="(max-width: 900px) 100vw, 33vw")}</div></a>
             <span class="meta">Vancouver Film School · PC &amp; Xbox</span>
-            <h3>Stellar Forever</h3>
+            <h3><a href="{L(p, "games/stellar-forever/")}" style="text-decoration:none">Stellar Forever</a></h3>
             <p>A 2D side-scrolling brawler in outer space. A 19-year-old crashes a royal wedding, then fights hammerhead shark gangs and a giant Octosaurus Rex to escape the Forbidden Kingdom. Game Designer and Programmer.</p>
+            <div class="actions"><a class="btn" href="{L(p, "games/stellar-forever/")}" aria-label="View project: Stellar Forever">Trailer &amp; spotlight</a></div>
           </article>
           <article class="card">
             <div class="blob b3">{img(p, "beaver", "Die Beaver Die: a gnome pirate's machine rolls through a valley", cls="zoom", sizes="(max-width: 900px) 100vw, 33vw")}</div>
@@ -514,6 +516,26 @@ def gameloft_body(p):
       <div class="prose"><p>Led several development teams to complete top-tier mobile titles, managing more than 50 onshore and offshore developers, designers and QA testers.</p><p>Worked with offshore senior executives and business partners on design requirements, progress updates and added features.</p></div>
     </section>
     <section aria-label="Asphalt 6 key art">{img(p, "asphalt6", "Asphalt 6: Adrenaline key art", cls="zoom", sizes="100vw", style="border-radius:20px;width:100%")}</section>
+  </div>
+  {next_links(p, GAMES, "games")}'''
+
+def stellar_body(p):
+    return game_head(p, "Vancouver Film School", "Stellar Forever",
+        "A 2D side-scrolling action-adventure set in outer space.",
+        [("Role", "Game Designer &amp; Programmer"), ("Genre", "RPG side-scrolling brawler"), ("Platform", "PC, Xbox")], [],
+        "stellar", "Stellar Forever: the heroine fights a giant Octosaurus Rex", "b2") + f'''
+  <div class="wrap page-body">
+    <section class="cols">
+      <h2>The game</h2>
+      <div class="prose"><p>You play a 19-year-old girl who crashes a royal wedding. To find her way out of the Forbidden Kingdom she has to battle hammerhead shark gangs and a giant Octosaurus Rex.</p></div>
+    </section>
+    <section class="block" aria-labelledby="videos-title">
+      <h2 id="videos-title">Videos</h2>
+      <div class="videos">
+        {video("L5y-jxZg7fs", "Stellar Forever trailer", "Gameplay trailer")}
+        {video("r4likTtedFY", "The Blast Light: Stellar Forever", "Media spotlight · Vancouver Film School")}
+      </div>
+    </section>
   </div>
   {next_links(p, GAMES, "games")}'''
 
@@ -859,6 +881,8 @@ def build_pages():
                             game_ld("Teen Patti Gold", "Card game", ["Android", "iOS"], [u for _, u in PLAY["teen-patti-gold"]], "A top-grossing mobile three-card game from Moonfrog Labs.")),
         "dr-nero": ("Dr Nero | Serious Game Case Study | Samuel T Sawian", "A non-violent RPG that teaches research scientists to collaborate, designed by Samuel T Sawian for a Fortune 500 company. Gold Medal, LearnX Asia Pacific 2013.", nero_body,
                     game_ld("The Curious Case of Dr Nero", "Role-playing game", ["PC"], None, "An action-adventure RPG designed to promote collaboration among research scientists.")),
+        "stellar-forever": ("Stellar Forever | Game Designer | Samuel T Sawian", "Stellar Forever, a 2D side-scrolling space brawler for PC and Xbox, designed and programmed by Samuel T Sawian at Vancouver Film School. Trailer and spotlight.", stellar_body,
+                            game_ld("Stellar Forever", "Action-adventure", ["PC", "Xbox"], None, "A 2D side-scrolling action-adventure brawler set in outer space.")),
         "gameloft": ("Gameloft Titles | Game Producer | Samuel T Sawian", "Samuel T Sawian's work as Game Producer at Gameloft on mobile titles including Asphalt, Assassin's Creed, Spider-Man and James Cameron's Avatar.", gameloft_body,
                      None),
     }
