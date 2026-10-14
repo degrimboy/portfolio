@@ -125,3 +125,10 @@ a.band:hover .btn{border-color:var(--accent);color:var(--accent)}
 /* numbers strip on the home page */
 .proof{border-bottom:1px solid var(--line)}
 .proof .stats{border-top:1px solid var(--line)}
+.sites{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3vw,40px)}
+.sites article{display:grid;gap:12px;align-content:start;padding:clamp(20px,3vw,28px);border:1px solid var(--line);border-radius:20px;background:var(--bg);min-width:0}
+.sites h3{font-family:var(--display)}
+.sites p{color:var(--muted)}
+.sites .btn{justify-self:start;text-transform:none;letter-spacing:.02em}
+@media (max-width:900px){.sites{grid-template-columns:minmax(0,1fr)}}
+.sites article{grid-template-rows:auto auto 1fr auto}

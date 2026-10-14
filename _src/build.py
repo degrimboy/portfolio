@@ -624,13 +624,13 @@ def product_body(p):
     <div class="wrap">
       <div class="section-head">
         <h1>Product design</h1>
-        <p>Procurement software for dental groups, an app that put Mumbai's ragpickers back to work, a brand for Meghalaya's finest produce, and more.</p>
+        <p>Procurement software for dental groups, an app that put Mumbai's ragpickers back to work, a brand for Meghalaya's finest produce, and websites for schools and hospitals in Shillong.</p>
       </div>
       <article class="project">
         <div class="p-text">
           <span class="label">SaaS · Procurement &amp; accounts payable</span>
           <h2 class="h3like">Dentira</h2>
-          <p class="summary">A dental group can run hundreds of clinics, each ordering supplies from dozens of vendors, and every delivery brings an invoice. Dentira brings the buying and the paying into one place.</p>
+          <p class="summary">A dental group can run hundreds of clinics, each ordering supplies from dozens of vendors, and every delivery brings an invoice. Dentira brings the buying and the paying into one place, and some of the largest dental groups use it to run their procurement.</p>
           <div class="prose">
             <p>I own live product delivery: the roadmap, sprint planning and releases, working with design and engineering on how the workflows behave.</p>
             <p>Much of my work sits in the invoice lifecycle: approvals, sending invoices back for correction, bulk actions, role-based permissions, and syncing to accounting systems. I started with a full UX audit and turned it into personas, interactive mockups and a phased improvement plan.</p>
@@ -640,9 +640,9 @@ def product_body(p):
         <div class="p-media">
           <figure class="flow" aria-label="The invoice journey in Dentira">
             <ol>
-              <li><b>Order</b><span>Clinics buy from many vendors in one place</span></li>
+              <li><b>Order</b><span>Real-time catalogues and pricing from many vendors, in one place</span></li>
               <li><b>Receive</b><span>Deliveries are checked in at the clinic</span></li>
-              <li><b>Match</b><span>Invoice, order and delivery are matched three ways</span></li>
+              <li><b>Match</b><span>Invoices are read automatically and matched to the order and delivery</span></li>
               <li class="loop"><b>Approve</b><span>The right people sign off, by role</span><em>or send back for correction</em></li>
               <li><b>Sync</b><span>Approved invoices flow to accounting</span></li>
             </ol>
@@ -670,6 +670,29 @@ def product_body(p):
         </div>
         <div class="p-media"><a href="{L(p, "product/meghalayan-age/")}" tabindex="-1" aria-hidden="true"><div class="blob b2">{img(p, "ma-store-1", "Meghalayan Age store interior with textiles and crafts")}</div></a></div>
       </article>
+      <section class="more" aria-labelledby="sites-title" style="margin-bottom:clamp(48px,7vw,80px)">
+        <h2 id="sites-title" class="label" style="margin-bottom:28px">Websites</h2>
+        <div class="sites">
+          <article>
+            <span class="meta">Designed &amp; built</span>
+            <h3>Happy Feet School</h3>
+            <p>A playschool in Shillong that has taught three-to-five-year-olds through play since 2012. The site carries that warmth: bright photography, its Nursery and Lower KG programmes, admissions, a gallery of school life, and a decade of letters from parents.</p>
+            <a class="btn" href="https://happyfeetshillong.com/" target="_blank" rel="noopener">happyfeetshillong.com<span class="visually-hidden"> (opens in a new tab)</span><span aria-hidden="true">↗</span></a>
+          </article>
+          <article>
+            <span class="meta">Built</span>
+            <h3>Supercare Hospital</h3>
+            <p>A 150-bed multi-speciality hospital in Shillong. The site helps patients find a doctor, book an appointment and reach emergency care quickly, and lays out the hospital's specialities, services and visiting rules.</p>
+            <a class="btn" href="https://supercarehospital.com/" target="_blank" rel="noopener">supercarehospital.com<span class="visually-hidden"> (opens in a new tab)</span><span aria-hidden="true">↗</span></a>
+          </article>
+          <article>
+            <span class="meta">Designed</span>
+            <h3>Bethany Hospitals</h3>
+            <p>A hospital network founded in Shillong in 2002, with branches across Meghalaya and its own nursing school. The site brings 22 specialities, four locations, doctor search, health packages and patient guides into one clear structure.</p>
+            <a class="btn" href="https://bethanyhospitals.com/" target="_blank" rel="noopener">bethanyhospitals.com<span class="visually-hidden"> (opens in a new tab)</span><span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+      </section>
       <div class="more">
         <h2 class="label" style="margin-bottom:28px">Other product work</h2>
         <div class="others">
@@ -995,7 +1018,7 @@ def build_pages():
             (lambda ld: lambda pg: [webpage_ld(pg, extra={"about": ld} if ld else None)])(ld))
 
     add(Page("product/", "Product Design Portfolio | Samuel T Sawian",
-             "Product work by Samuel T Sawian: Dentira dental procurement software, Recycled Earth, a UNICEF-featured waste app, Meghalayan Age branding, nULTA and 7 Sisters Kitchen.",
+             "Product work by Samuel T Sawian: Dentira, Recycled Earth, Meghalayan Age, and websites for Happy Feet School, Supercare and Bethany Hospitals.",
              "product", product_body, crumbs=P, nav="product/"),
         lambda pg: [webpage_ld(pg, "CollectionPage")])
     add(Page("product/recycled-earth/", "Recycled Earth | UX Case Study | Samuel T Sawian",
