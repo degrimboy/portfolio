@@ -383,3 +383,18 @@ a.band:hover .btn{border-color:var(--accent);color:var(--accent)}
 .shot.coop{display:grid;place-items:center;background:var(--surface);border-radius:20px;padding:clamp(20px,4vw,40px)}
 .shot.coop img{max-width:371px;border:0;border-radius:12px}
 @media (max-width:900px){.stage,.stage.flip{grid-template-columns:minmax(0,1fr)}.stage.flip .shot{order:0}}
+/* Dentira invoice journey */
+.flow{margin:0;background:var(--bg);border:1px solid var(--line);border-radius:28px;padding:clamp(24px,4vw,44px);display:grid;gap:20px}
+.flow ol{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:f}
+.flow li{position:relative;display:grid;grid-template-columns:120px minmax(0,1fr);gap:4px 20px;align-items:baseline;padding:14px 0 14px 28px;border-left:1px solid var(--accent-dim);margin-left:6px}
+.flow li::before{content:"";position:absolute;left:-6px;top:20px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:1px solid var(--accent)}
+.flow li:last-child::before{background:var(--accent)}
+.flow b{font-family:var(--display);font-weight:600;font-size:var(--fs-m)}
+.flow span{color:var(--muted);font-size:var(--fs-s)}
+.flow em{grid-column:2;font-style:normal;font-family:var(--mono);font-size:var(--fs-s);color:var(--accent);letter-spacing:.04em}
+.flow em::before{content:"↺ "}
+.flow figcaption{font-family:var(--mono);font-size:var(--fs-s);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:520px){.flow li{grid-template-columns:minmax(0,1fr)}.flow em{grid-column:1}}
+/* numbers strip on the home page */
+.proof{border-bottom:1px solid var(--line)}
+.proof .stats{border-top:1px solid var(--line)}

@@ -261,16 +261,10 @@ def home_body(p):
     <div class="wrap">
       <div>
         <h1 id="intro-title">Samuel T<br>Sawian<em>.</em></h1>
-        <p class="label tagline">Game producer · Product manager · LiveOps lead</p>
-        <p class="lede">I design, produce and ship games played by millions. <span>Fifteen years across Gameloft, GSN, Zynga and Moonfrog, plus product and brand design for social-impact and Meghalayan craft ventures.</span></p>
+        <p class="label tagline">Creative director · Storyteller · Forest seeker</p>
+        <p class="lede">I've spent fifteen years making games that people come back to every day. <span>Every feature I build starts with a small story: a farm that has never had a rooster, a scientist searching an alien planet for a missing explorer, a city's ragpickers getting their work back.</span></p>
       </div>
       <div class="portrait">{img(p, "portrait", "Black and white portrait of Samuel T Sawian seated by a window", lazy=False, sizes="(max-width: 900px) 300px, 380px", hi=True)}</div>
-    </div>
-    <div class="stats">
-      <div class="stat"><b>40M</b><span>Monthly active users at FarmVille 2's peak</span></div>
-      <div class="stat"><b>1M</b><span>Daily active users on Bingo Bash</span></div>
-      <div class="stat"><b>$165M</b><span>Bingo Bash studio acquisition by GSN</span></div>
-      <div class="stat"><b>15+</b><span>Years running live games and digital products</span></div>
     </div>
   </section>
 
@@ -285,6 +279,17 @@ def home_body(p):
         <a class="btn solid" href="{L(p, "games/")}">All games</a>
         <a class="btn" href="{L(p, "product/")}">All product work</a>
       </div>
+    </div>
+  </section>
+
+
+  <section class="proof" aria-labelledby="proof-title">
+    <h2 id="proof-title" class="visually-hidden">By the numbers</h2>
+    <div class="stats">
+      <div class="stat"><b>40M</b><span>Monthly active users at FarmVille 2's peak</span></div>
+      <div class="stat"><b>1M</b><span>Daily active users on Bingo Bash</span></div>
+      <div class="stat"><b>$165M</b><span>Bingo Bash studio acquisition by GSN</span></div>
+      <div class="stat"><b>15+</b><span>Years running live games and digital products</span></div>
     </div>
   </section>
 
@@ -324,10 +329,10 @@ def games_body(p):
         <h1>Game design</h1>
         <p>Live-service hits, casino and card games with millions of players, a serious game for a Fortune 500 client, and the indie projects where it started.</p>
       </div>
-      {spread(p, "bingo-bash", "GSN Games · 2013 – 2015", "Bingo Bash", "The world's #1 free-to-play bingo game. Top 10 grossing on iTunes in 2013 and 2014, acquired by GSN for $165M.", "Associate Game Producer &amp; Designer", "bingo", "Bingo Bash key art with themed bingo rooms")}
-      {spread(p, "farmville-2", "Zynga · 2015 – 2016", "FarmVille 2", "Part of the core team that moved FarmVille 2 from San Francisco to India, in a game that peaked at 40M monthly players.", "Game Features and Content Producer", "farmville", "FarmVille 2 key art: a farm scene with animals", "b2", True)}
-      {spread(p, "teen-patti-gold", "Moonfrog Labs · 2017", "Teen Patti Gold", "India's favourite three-card game, with more than 4M monthly active users.", "Game Producer", "teenpatti", "Teen Patti Gold table with players around a card game", "b3")}
-      {spread(p, "dr-nero", "Tata Interactive Systems · 2012 – 2013", "The Curious Case of Dr Nero", "An action-adventure RPG for a Fortune 500 company, built to reward collaboration instead of competition.", "Senior Game Designer", "nero-1", "Dr Nero gameplay: an isometric alien jungle", "b2", True)}
+      {spread(p, "bingo-bash", "GSN Games · 2013 – 2015", "Bingo Bash", "A bingo hall for millions. The world's #1 free-to-play bingo game, top 10 grossing on iTunes two years running and acquired by GSN for $165M.", "Associate Game Producer &amp; Designer", "bingo", "Bingo Bash key art with themed bingo rooms")}
+      {spread(p, "farmville-2", "Zynga · 2015 – 2016", "FarmVille 2", "Forty million farmers, a move from San Francisco to India, and the first rooster in FarmVille's history.", "Game Features and Content Producer", "farmville", "FarmVille 2 key art: a farm scene with animals", "b2", True)}
+      {spread(p, "teen-patti-gold", "Moonfrog Labs · 2017", "Teen Patti Gold", "The card game of Diwali tables, carried onto phones for more than 4M monthly players.", "Game Producer", "teenpatti", "Teen Patti Gold table with players around a card game", "b3")}
+      {spread(p, "dr-nero", "Tata Interactive Systems · 2012 – 2013", "The Curious Case of Dr Nero", "How do you teach senior scientists to share what they know? Send them to an alien planet.", "Senior Game Designer", "nero-1", "Dr Nero gameplay: an isometric alien jungle", "b2", True)}
 
       <a class="band" href="{L(p, "games/gameloft/")}" style="text-decoration:none">
         {img(p, "avatar", "", sizes="100vw")}
@@ -383,10 +388,14 @@ def game_head(p, label, title, summary, rows, links, image, alt, b="", icon=None
   </header>'''
 
 def bingo_body(p):
-    return game_head(p, "GSN Games · 2013 – 2015", "Bingo Bash", "The world's #1 free-to-play bingo game.",
+    return game_head(p, "GSN Games · 2013 – 2015", "Bingo Bash", "A room full of strangers, a caller, and the hope that the next number is yours. Bingo Bash put that room online.",
         [("Role", "Associate Game Producer &amp; Designer"), ("Genre", "Social Casino"), ("Platform", "Facebook, Android, iOS")],
         PLAY["bingo-bash"], "bingo", "Bingo Bash key art with themed bingo rooms") + f'''
   <div class="wrap page-body">
+    <section class="cols">
+      <h2>The story</h2>
+      <div class="prose"><p>Bingo is one of the oldest social games there is. Bingo Bash took the bingo hall online and became the world's #1 free-to-play bingo game, one of the ten highest-grossing apps on iTunes two years running.</p><p>My job was to keep the hall full and lively: fresh content every cycle, sales and campaigns across Facebook, Android and iOS, and features that gave players a reason to come back the next day.</p></div>
+    </section>
     <section class="cols">
       <h2>Results</h2>
       {bullets(["Top 10 overall grossing app on iTunes in <strong>2013</strong> and <strong>2014</strong>",
@@ -407,7 +416,7 @@ def bingo_body(p):
   {next_links(p, GAMES, "games")}'''
 
 def farmville_body(p):
-    return game_head(p, "Zynga · 2015 – 2016", "FarmVille 2", "Part of the core team that moved FarmVille 2 from San Francisco to India.",
+    return game_head(p, "Zynga · 2015 – 2016", "FarmVille 2", "Forty million people tended farms in FarmVille 2. I helped bring the game's home from San Francisco to India, and gave its farms their first rooster.",
         [("Role", "Game Features and Content Producer"), ("Genre", "Simulation and Role Playing"), ("Platform", "Facebook")],
         PLAY["farmville-2"], "farmville", "FarmVille 2 key art: a farm scene with animals and giant pumpkins", "b2", "farmville-icon") + f'''
   <div class="wrap page-body">
@@ -502,10 +511,14 @@ def farmville_body(p):
   {next_links(p, GAMES, "games")}'''
 
 def teenpatti_body(p):
-    return game_head(p, "Moonfrog Labs · 2017", "Teen Patti Gold", "India's favourite three-card game, played by more than five crore people.",
+    return game_head(p, "Moonfrog Labs · 2017", "Teen Patti Gold", "The card game of Indian family gatherings, carried onto phones and played by more than five crore people.",
         [("Role", "Game Producer"), ("Genre", "Card Game, Casino"), ("Platform", "Android, iOS")],
         PLAY["teen-patti-gold"], "teenpatti", "Teen Patti Gold table with players around a card game", "b3", "teenpatti-icon") + f'''
   <div class="wrap page-body">
+    <section class="cols">
+      <h2>The story</h2>
+      <div class="prose"><p>Teen Patti has been dealt at Diwali tables for generations. Teen Patti Gold brought that table to phones, and it became one of India's top-grossing mobile card games.</p><p>I worked on what kept people at the table: VIP subscriptions, retention systems, and a web version so the game could follow players beyond their phones.</p></div>
+    </section>
     <section class="cols">
       <h2>Results</h2>
       {bullets(["More than <strong>4M</strong> monthly active users", "Around <strong>$250k</strong> monthly revenue",
@@ -520,7 +533,7 @@ def teenpatti_body(p):
 
 def nero_body(p):
     return game_head(p, "Tata Interactive Systems · 2012 – 2013", "The Curious Case of Dr Nero",
-        "An action-adventure RPG for an undisclosed Fortune 500 company, built to reward collaboration instead of competition.",
+        "How do you teach senior scientists to share what they know? We sent them to an alien planet.",
         [("Role", "Senior Game Designer"), ("Genre", "Role Playing Game"), ("Platform", "PC")], [],
         "nero-1", "Dr Nero gameplay: an isometric alien jungle with a mission dialogue") + f'''
   <div class="wrap page-body">
@@ -562,10 +575,14 @@ def gameloft_body(p):
     icons = [("gl-spiderman", "Spider-Man icon"), ("gl-assassins", "Assassin's Creed icon"), ("gl-avatar", "James Cameron's Avatar cover"),
              ("gl-asphalt6", "Asphalt 6 icon"), ("gl-asphalt5", "Asphalt 5 icon"), ("gl-settlers", "Gameloft title icon"), ("gl-modernwarfare", "Modern Warfare icon")]
     ic = "".join(f'<img src="{p.root}assets/img/{n}.webp" alt="{a}" width="{SIZES[n+".webp"][0]}" height="{SIZES[n+".webp"][1]}" loading="lazy" decoding="async">' for n, a in icons)
-    return game_head(p, "Gameloft · 2011 – 2012", "Gameloft", "Produced top-tier mobile titles, including James Cameron's Avatar, the world's first stereoscopic 3D game.",
+    return game_head(p, "Gameloft · 2011 – 2012", "Gameloft", "Console-sized adventures, made to fit in a pocket.",
         [("Role", "Game Producer"), ("Genre", "Various"), ("Platform", "Android, iOS")], [],
         "avatar", "James Cameron's Avatar game art: a Na'vi warrior in the jungle") + f'''
   <div class="wrap page-body">
+    <section class="cols">
+      <h2>The story</h2>
+      <div class="prose"><p>In the early 2010s, Gameloft was putting big-screen adventures on phones: street racing in Asphalt, rooftops in Assassin's Creed, web-slinging in Spider-Man, and James Cameron's Avatar, the world's first stereoscopic 3D game.</p><p>This is where I learned to produce. I steered teams of more than fifty developers, designers and testers across continents, keeping very different games on course at the same time.</p></div>
+    </section>
     <section class="cols">
       <h2>Games</h2>
       <div class="block">
@@ -583,7 +600,7 @@ def gameloft_body(p):
 
 def stellar_body(p):
     return game_head(p, "Vancouver Film School", "Stellar Forever",
-        "A 2D side-scrolling action-adventure set in outer space.",
+        "A royal wedding, a gatecrasher, and a giant Octosaurus Rex. A 2D side-scrolling brawler set in outer space.",
         [("Role", "Game Designer &amp; Programmer"), ("Genre", "RPG side-scrolling brawler"), ("Platform", "PC, Xbox")], [],
         "stellar", "Stellar Forever: the heroine fights a giant Octosaurus Rex", "b2") + f'''
   <div class="wrap page-body">
@@ -607,8 +624,32 @@ def product_body(p):
     <div class="wrap">
       <div class="section-head">
         <h1>Product design</h1>
-        <p>UX for a waste-collection network that put Mumbai's ragpickers back to work, a brand and packaging system for Meghalaya's finest produce, and more.</p>
+        <p>Procurement software for dental groups, an app that put Mumbai's ragpickers back to work, a brand for Meghalaya's finest produce, and more.</p>
       </div>
+      <article class="project">
+        <div class="p-text">
+          <span class="label">SaaS · Procurement &amp; accounts payable</span>
+          <h2 class="h3like">Dentira</h2>
+          <p class="summary">A dental group can run hundreds of clinics, each ordering supplies from dozens of vendors, and every delivery brings an invoice. Dentira brings the buying and the paying into one place.</p>
+          <div class="prose">
+            <p>I own live product delivery: the roadmap, sprint planning and releases, working with design and engineering on how the workflows behave.</p>
+            <p>Much of my work sits in the invoice lifecycle: approvals, sending invoices back for correction, bulk actions, role-based permissions, and syncing to accounting systems. I started with a full UX audit and turned it into personas, interactive mockups and a phased improvement plan.</p>
+          </div>
+          {facts([("Role", "Product Manager"), ("Since", "April 2025"), ("Users", "Dental support organisations")])}
+        </div>
+        <div class="p-media">
+          <figure class="flow" aria-label="The invoice journey in Dentira">
+            <ol>
+              <li><b>Order</b><span>Clinics buy from many vendors in one place</span></li>
+              <li><b>Receive</b><span>Deliveries are checked in at the clinic</span></li>
+              <li><b>Match</b><span>Invoice, order and delivery are matched three ways</span></li>
+              <li class="loop"><b>Approve</b><span>The right people sign off, by role</span><em>or send back for correction</em></li>
+              <li><b>Sync</b><span>Approved invoices flow to accounting</span></li>
+            </ol>
+            <figcaption>The invoice journey</figcaption>
+          </figure>
+        </div>
+      </article>
       <article class="project">
         <div class="p-text">
           <span class="label">UX &amp; UI · Branding · Android</span>
@@ -655,7 +696,7 @@ def re_body(p):
     <div class="p-text">
       <span class="label">UX &amp; UI · Branding · Android</span>
       <h1>Recycled Earth</h1>
-      <p class="summary">A mobile app to schedule and track how household waste is picked up, processed and disposed of.</p>
+      <p class="summary">When Mumbai changed how it collected its rubbish, the ragpickers who sorted it lost their work. Recycled Earth gave it back, with an app to run every pickup.</p>
       {facts([("Roles", "UX and UI design, Branding and Identity"), ("Platform", "Android"), ("Instagram", "@therecycledearth")])}
     </div>
     <div class="p-media" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center">
@@ -743,7 +784,7 @@ def ma_body(p):
     <div class="p-text">
       <span class="label">Brand · Product · Print &amp; packaging</span>
       <h1>Meghalayan Age</h1>
-      <p class="summary">Promoting tourism entrepreneurship and high-value experiences in Meghalaya.</p>
+      <p class="summary">Meghalaya grows turmeric with the highest curcumin content in the world. Meghalayan Age gave the state's produce a brand worthy of it.</p>
       {facts([("Client", "Government of Meghalaya"), ("Roles", "Brand and Identity Design, Product Design, Creative Direction, Project Management"), ("Platform", "Print and Packaging")])}
     </div>
     <div class="p-media"><div class="blob">{img(p, "ma-store-1", "Meghalayan Age store interior with textiles and crafts", cls="zoom", lazy=False, hi=True)}</div></div>
@@ -954,7 +995,7 @@ def build_pages():
             (lambda ld: lambda pg: [webpage_ld(pg, extra={"about": ld} if ld else None)])(ld))
 
     add(Page("product/", "Product Design Portfolio | Samuel T Sawian",
-             "Product and brand design by Samuel T Sawian: Recycled Earth, a UNICEF-featured waste app, Meghalayan Age branding and packaging, nULTA and 7 Sisters Kitchen.",
+             "Product work by Samuel T Sawian: Dentira dental procurement software, Recycled Earth, a UNICEF-featured waste app, Meghalayan Age branding, nULTA and 7 Sisters Kitchen.",
              "product", product_body, crumbs=P, nav="product/"),
         lambda pg: [webpage_ld(pg, "CollectionPage")])
     add(Page("product/recycled-earth/", "Recycled Earth | UX Case Study | Samuel T Sawian",
