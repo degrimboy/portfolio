@@ -109,7 +109,7 @@ PERSON = {
     "name": "Samuel T Sawian",
     "alternateName": "Samuel Sawian",
     "jobTitle": "Game Producer and Product Manager",
-    "description": "Game producer, product manager and LiveOps lead with 15+ years running live, free-to-play games and digital products.",
+    "description": "Game producer, product manager and LiveOps lead running live, free-to-play games and digital products, building games since 2010.",
     "email": "mailto:ssawian@gmail.com",
     "sameAs": [LINKEDIN, BLOG],
     "address": {"@type": "PostalAddress", "addressLocality": "Shillong", "addressRegion": "Meghalaya", "addressCountry": "IN"},
@@ -262,7 +262,7 @@ def home_body(p):
       <div>
         <h1 id="intro-title">Samuel T<br>Sawian<em>.</em></h1>
         <p class="label tagline">Creative director · Storyteller · Forest seeker</p>
-        <p class="lede">I've spent fifteen years making games that people come back to every day. <span>Every feature I build starts with a small story: a farm that has never had a rooster, a scientist searching an alien planet for a missing explorer, a city's ragpickers getting their work back.</span></p>
+        <p class="lede">I've been making games that people come back to every day since 2010. <span>Every feature I build starts with a small story: a farm that has never had a rooster, a scientist searching an alien planet for a missing explorer, a city's ragpickers getting their work back.</span></p>
       </div>
       <div class="portrait">{img(p, "portrait", "Black and white portrait of Samuel T Sawian seated by a window", lazy=False, sizes="(max-width: 900px) 300px, 380px", hi=True)}</div>
     </div>
@@ -289,7 +289,7 @@ def home_body(p):
       <div class="stat"><b>40M</b><span>Monthly active users at FarmVille 2's peak</span></div>
       <div class="stat"><b>1M</b><span>Daily active users on Bingo Bash</span></div>
       <div class="stat"><b>$165M</b><span>Bingo Bash studio acquisition by GSN</span></div>
-      <div class="stat"><b>15+</b><span>Years running live games and digital products</span></div>
+      <div class="stat"><b>2010</b><span>Building games since</span></div>
     </div>
   </section>
 
@@ -298,7 +298,7 @@ def home_body(p):
       <div>
         <span class="label">About</span>
         <h2 id="about-title" style="margin-top:14px">Game producer, product manager, LiveOps lead.</h2>
-        <div class="lead prose"><p>Senior Producer and Product Manager with 15+ years running live, free-to-play games and digital products end-to-end. I lead distributed, multi-disciplinary teams — engineering, QA, art, sound, localisation — through full production pipelines, using Agile and Waterfall to keep delivery on track. My background also spans LiveOps and post-launch optimisation on high-revenue titles.</p><p>On weekends, you'll find me foraging for lost stories, old forests, and forgotten places.</p></div>
+        <div class="lead prose"><p>Senior Producer and Product Manager, running live, free-to-play games and digital products end-to-end since 2010. I lead distributed, multi-disciplinary teams — engineering, QA, art, sound, localisation — through full production pipelines, using Agile and Waterfall to keep delivery on track. My background also spans LiveOps and post-launch optimisation on high-revenue titles.</p><p>On weekends, you'll find me foraging for lost stories, old forests, and forgotten places.</p></div>
         <div class="actions" style="margin-top:28px"><a class="btn" href="{L(p, "about/")}">Experience, awards &amp; talks</a></div>
       </div>
       <ul class="roles" aria-label="Current roles">
@@ -846,7 +846,7 @@ def about_body(p):
     <div>
       <span class="label">Game Producer · Product Manager · LiveOps Lead</span>
       <h1 style="margin-top:14px">About</h1>
-      <div class="lead prose"><p>Senior Producer and Product Manager with 15+ years running live, free-to-play games and digital products end-to-end. I lead distributed, multi-disciplinary teams — engineering, QA, art, sound, localisation — through full production pipelines, using Agile and Waterfall to keep delivery on track. My background also spans LiveOps and post-launch optimisation on high-revenue titles.</p><p>On weekends, you'll find me foraging for lost stories, old forests, and forgotten places.</p></div>
+      <div class="lead prose"><p>Senior Producer and Product Manager, running live, free-to-play games and digital products end-to-end since 2010. I lead distributed, multi-disciplinary teams — engineering, QA, art, sound, localisation — through full production pipelines, using Agile and Waterfall to keep delivery on track. My background also spans LiveOps and post-launch optimisation on high-revenue titles.</p><p>On weekends, you'll find me foraging for lost stories, old forests, and forgotten places.</p></div>
     </div>
     <div class="portrait">{img(p, "portrait", "Black and white portrait of Samuel T Sawian seated by a window", lazy=False, sizes="(max-width: 900px) 280px, 340px", hi=True)}</div>
   </section>
