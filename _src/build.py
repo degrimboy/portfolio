@@ -20,7 +20,7 @@ SITE_URL = "https://degrimboy.github.io/portfolio"   # e.g. "https://samuelsawia
 
 SITE_NAME = "Samuel T Sawian"
 LINKEDIN = "https://www.linkedin.com/in/samuelsawian"
-BLOG = "https://mrbiped.com/"
+BLOG = "https://samuelsawian.substack.com/"
 EMAIL = "ssawian@gmail.com"
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -879,7 +879,7 @@ def about_body(p):
             <ul class="awards">
               <li><b><a href="mailto:{EMAIL}">{EMAIL}</a></b><span>Email</span></li>
               <li><b>How a serious game transformed a business</b><span>Publication</span></li>
-              <li><b><a href="{BLOG}" target="_blank" rel="noopener">mrbiped.com</a></b><span>Blog</span></li>
+              <li><b><a href="{BLOG}" target="_blank" rel="noopener">samuelsawian.substack.com</a></b><span>Blog</span></li>
               <li><b><a href="{LINKEDIN}" target="_blank" rel="noopener">linkedin.com/in/samuelsawian</a></b><span>LinkedIn</span></li>
             </ul>
           </div>
