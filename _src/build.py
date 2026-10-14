@@ -109,7 +109,7 @@ PERSON = {
     "name": "Samuel T Sawian",
     "alternateName": "Samuel Sawian",
     "jobTitle": "Game Producer and Product Manager",
-    "description": "Game producer, product manager and LiveOps lead with over a decade building live, free-to-play games and digital products.",
+    "description": "Game producer, product manager and LiveOps lead with 15+ years running live, free-to-play games and digital products.",
     "email": "mailto:ssawian@gmail.com",
     "sameAs": [LINKEDIN, BLOG],
     "address": {"@type": "PostalAddress", "addressLocality": "Shillong", "addressRegion": "Meghalaya", "addressCountry": "IN"},
@@ -235,11 +235,12 @@ def next_links(page, items, section):
     keys = [k for k, _ in items]
     me = page.path.strip("/").split("/")[-1]
     i = keys.index(me)
-    prev_k, prev_n = items[i - 1]
-    next_k, next_n = items[(i + 1) % len(items)]
+    index_name = {"games": "All games", "product": "All product work"}[section]
+    prev_href, prev_n = (f"{section}/{items[i-1][0]}/", items[i-1][1]) if i > 0 else (f"{section}/", index_name)
+    next_href, next_n = (f"{section}/{items[i+1][0]}/", items[i+1][1]) if i < len(items) - 1 else (f"{section}/", index_name)
     return f'''<nav class="next wrap" aria-label="More projects">
-  <a href="{L(page, f"{section}/{prev_k}/")}"><span class="label">Previous</span><b>{prev_n}</b></a>
-  <a href="{L(page, f"{section}/{next_k}/")}"><span class="label">Next</span><b>{next_n}</b></a>
+  <a href="{L(page, prev_href)}"><span class="label">Previous</span><b>{prev_n}</b></a>
+  <a href="{L(page, next_href)}"><span class="label">Next</span><b>{next_n}</b></a>
 </nav>'''
 
 # ---------- home
@@ -261,7 +262,7 @@ def home_body(p):
       <div>
         <h1 id="intro-title">Samuel T<br>Sawian<em>.</em></h1>
         <p class="label tagline">Game producer · Product manager · LiveOps lead</p>
-        <p class="lede">I design, produce and ship games played by millions. <span>Over a decade across Gameloft, GSN, Zynga and Moonfrog, plus product and brand design for social-impact and Meghalayan craft ventures.</span></p>
+        <p class="lede">I design, produce and ship games played by millions. <span>Fifteen years across Gameloft, GSN, Zynga and Moonfrog, plus product and brand design for social-impact and Meghalayan craft ventures.</span></p>
       </div>
       <div class="portrait">{img(p, "portrait", "Black and white portrait of Samuel T Sawian seated by a window", lazy=False, sizes="(max-width: 900px) 300px, 380px", hi=True)}</div>
     </div>
@@ -269,7 +270,7 @@ def home_body(p):
       <div class="stat"><b>40M</b><span>Monthly active users at FarmVille 2's peak</span></div>
       <div class="stat"><b>1M</b><span>Daily active users on Bingo Bash</span></div>
       <div class="stat"><b>$165M</b><span>Bingo Bash studio acquisition by GSN</span></div>
-      <div class="stat"><b>10+</b><span>Years in game design, development and management</span></div>
+      <div class="stat"><b>15+</b><span>Years running live games and digital products</span></div>
     </div>
   </section>
 
@@ -291,8 +292,8 @@ def home_body(p):
     <div class="wrap teaser">
       <div>
         <span class="label">About</span>
-        <h2 id="about-title" style="margin-top:14px">Producer, product manager, studio founder.</h2>
-        <p class="lead">I build and run live, free-to-play games and digital products. A background in game and systems design shapes how I own roadmaps, run LiveOps and tune products after launch.</p>
+        <h2 id="about-title" style="margin-top:14px">Game producer, product manager, LiveOps lead.</h2>
+        <div class="lead prose"><p>Senior Producer and Product Manager with 15+ years running live, free-to-play games and digital products end-to-end. I lead distributed, multi-disciplinary teams — engineering, QA, art, sound, localisation — through full production pipelines, using Agile and Waterfall to keep delivery on track. My background also spans LiveOps and post-launch optimisation on high-revenue titles.</p><p>On weekends, you'll find me foraging for lost stories, old forests, and forgotten places.</p></div>
         <div class="actions" style="margin-top:28px"><a class="btn" href="{L(p, "about/")}">Experience, awards &amp; talks</a></div>
       </div>
       <ul class="roles" aria-label="Current roles">
@@ -702,19 +703,19 @@ def re_body(p):
       </ol>
     </section>
     <section class="users" aria-labelledby="users-title">
-      <h2 id="users-title" style="font-size:var(--s3)">Three users, three versions of the app</h2>
+      <h2 id="users-title" style="font-size:var(--fs-l)">Three users, three versions of the app</h2>
       <div class="user">
-        <div><h3 style="font-size:var(--s2);margin-bottom:10px">Residents</h3><div class="prose"><p>People living in building societies registered with Recycled Earth. They see pickup schedules, track the truck down to the minute, and read waste and recycling tips.</p></div></div>
+        <div><h3 style="font-size:var(--fs-m);margin-bottom:10px">Residents</h3><div class="prose"><p>People living in building societies registered with Recycled Earth. They see pickup schedules, track the truck down to the minute, and read waste and recycling tips.</p></div></div>
         <div class="phones" tabindex="0" aria-label="Resident app screens, scrollable">
           {phone(p, "re-res-login", "Resident app login screen", "Log in")}{phone(p, "re-res-home", "Resident landing page with pickup status", "Landing")}{phone(p, "re-res-schedule", "Resident pickup schedule", "Pickup schedule")}{phone(p, "re-res-track", "Live truck tracking map", "Truck tracking")}{phone(p, "re-res-pickup", "Landing page with a pickup scheduled", "Pickup scheduled")}
         </div>
       </div>
       <div class="user">
-        <div><h3 style="font-size:var(--s2);margin-bottom:10px">Pickup drivers</h3><div class="prose"><p>The most minimal version of the app. Drivers see their route and every pickup on it. GPS units on trucks gifted by the municipality make live tracking possible.</p></div></div>
+        <div><h3 style="font-size:var(--fs-m);margin-bottom:10px">Pickup drivers</h3><div class="prose"><p>The most minimal version of the app. Drivers see their route and every pickup on it. GPS units on trucks gifted by the municipality make live tracking possible.</p></div></div>
         <div class="phones">{phone(p, "re-drv-home", "Driver landing page with today's trips", "Trips")}{phone(p, "re-map", "Driver route map", "Route")}</div>
       </div>
       <div class="user">
-        <div><h3 style="font-size:var(--s2);margin-bottom:10px">Admins</h3><div class="prose"><p>Admins add routes and pickup points, track every truck across routes, and manage the housing societies on each route.</p></div></div>
+        <div><h3 style="font-size:var(--fs-m);margin-bottom:10px">Admins</h3><div class="prose"><p>Admins add routes and pickup points, track every truck across routes, and manage the housing societies on each route.</p></div></div>
         <div class="phones" tabindex="0" aria-label="Admin app screens, scrollable">
           {phone(p, "re-adm-home", "Admin landing page with route management", "Landing")}{phone(p, "re-adm-route", "Active truck tracking on a route", "Truck tracking")}{phone(p, "re-adm-pickups", "Pickup point management", "Pickups")}{phone(p, "re-adm-users", "Pickup point requests from users", "Users")}{phone(p, "re-adm-new", "Adding a new route", "New route")}
         </div>
@@ -757,11 +758,11 @@ def ma_body(p):
     </section>
     <section class="paper">
       <div class="prose">
-        <h2 style="font-size:var(--s2);color:#1b1b1b">Branding and logo</h2>
+        <h2 style="font-size:var(--fs-m);color:#1b1b1b">Branding and logo</h2>
         <p>Meghalaya grows organic food that deserves to be known far beyond the state. The brand had to match the care of the artisans and farmers behind it, and stand for high standards and quality.</p>
         <p>The logo is a monogram of the company's initials, borrowing the confidence of couture fashion marks. Minimal, a little luxurious, a touch bold: simple organic products made to exacting standards.</p>
         <div class="tags"><span>Sophisticated</span><span>Luxurious</span><span>Modern</span><span>Elegant</span><span>Refined</span></div>
-        <p style="font-size:.875rem">Combination mark and wordmark · Black and white</p>
+        <p style="font-size:var(--fs-s)">Combination mark and wordmark · Black and white</p>
       </div>
       <div class="logo-tile">{img(p, "ma-logo", "Meghalayan Age logo: a mountain monogram with wordmark", sizes="260px", style="max-width:260px")}</div>
     </section>
@@ -804,7 +805,7 @@ def about_body(p):
     <div>
       <span class="label">Game Producer · Product Manager · LiveOps Lead</span>
       <h1 style="margin-top:14px">About</h1>
-      <p class="lead">I build and run live, free-to-play games and digital products. A background in game and systems design shapes how I own roadmaps, run LiveOps and tune products after launch, across games and SaaS platforms.</p>
+      <div class="lead prose"><p>Senior Producer and Product Manager with 15+ years running live, free-to-play games and digital products end-to-end. I lead distributed, multi-disciplinary teams — engineering, QA, art, sound, localisation — through full production pipelines, using Agile and Waterfall to keep delivery on track. My background also spans LiveOps and post-launch optimisation on high-revenue titles.</p><p>On weekends, you'll find me foraging for lost stories, old forests, and forgotten places.</p></div>
     </div>
     <div class="portrait">{img(p, "portrait", "Black and white portrait of Samuel T Sawian seated by a window", lazy=False, sizes="(max-width: 900px) 280px, 340px", hi=True)}</div>
   </section>
@@ -1018,7 +1019,7 @@ FONTS = """@font-face{font-family:"Bricolage Grotesque";src:url(fonts/bricolage-
 @font-face{font-family:"IBM Plex Mono";src:url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"IBM Plex Mono";src:url(fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2");font-weight:500;font-style:normal;font-display:swap}
 .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.h3like{font-size:var(--s4);letter-spacing:-.025em}
+.h3like{font-size:var(--fs-l);letter-spacing:-.025em}
 """
 
 if __name__ == "__main__":
