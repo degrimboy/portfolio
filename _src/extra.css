@@ -229,3 +229,45 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation:none
 .yt-out{font-family:var(--mono);font-size:var(--fs-s);color:var(--accent);text-decoration:none;letter-spacing:.04em;justify-self:start}
 .yt-out:hover{text-decoration:underline}
 .portrait picture{display:block;width:100%;height:100%}
+
+/* ---------- Character-card hero (trial) ---------- */
+.cardhero{position:relative;overflow:hidden;background:var(--umber, #2a1a10);border-bottom:1px solid var(--line);--wave:var(--mustard, #d8ad2f)}
+.cardhero #waves{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;display:block}
+.cards2{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);padding-block:clamp(36px,5vw,64px);align-items:stretch;perspective:1600px}
+.ccard{position:relative;display:grid;gap:14px;align-content:start;background:var(--bg);color:var(--fg);border-radius:22px;padding:clamp(18px,2.4vw,28px);box-shadow:0 24px 60px rgba(0,0,0,.35);transition:transform .5s cubic-bezier(.2,.7,.2,1);min-width:0}
+/* double-rule card border with hex corner studs */
+.ccard::before{content:"";position:absolute;inset:9px;border:1px solid var(--accent);border-radius:15px;pointer-events:none;box-shadow:inset 0 0 0 4px var(--bg), inset 0 0 0 5px color-mix(in srgb, var(--accent) 45%, transparent)}
+.ccard::after{content:"";position:absolute;top:3px;left:50%;width:22px;height:13px;margin-left:-11px;background:var(--accent);clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)}
+.front{transform:rotate(-1.2deg)}
+.back{transform:rotate(1.2deg)}
+.cards2:hover .front{transform:rotate(-1.2deg) translateY(-6px) rotateY(4deg)}
+.cards2:hover .back{transform:rotate(1.2deg) translateY(-6px) rotateY(-4deg)}
+.ccard-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:4px 6px 0}
+.ccard-top .label{color:var(--accent)}
+.ccard-art{border-radius:12px;overflow:hidden;aspect-ratio:5/4;background:var(--surface);border:1px solid var(--line)}
+.ccard-art picture,.ccard-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:55% 22%}
+.ccard-name{font-size:var(--fs-l);letter-spacing:-.03em;line-height:1;padding-inline:6px}
+.ccard-class{color:var(--accent);padding-inline:6px}
+.ccard-flavour{color:var(--muted);padding:12px 6px 4px;border-top:1px solid var(--line)}
+.cstats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin:0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.cstats div{display:flex;flex-direction:column;justify-content:flex-start;gap:4px;padding:14px 16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cstats div:nth-child(2n){border-right:0}
+.cstats div:nth-child(n+3){border-bottom:0}
+.cstats dt{font-size:var(--fs-s);color:var(--muted);line-height:1.35}
+.cstats dd{order:-1;margin:0;font-family:var(--display);font-size:var(--fs-l);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--fg)}
+.cskills{list-style:none;margin:0;padding:0 6px;display:grid;gap:14px}
+.cskills li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start;padding-top:14px;border-top:1px solid var(--line)}
+.cskills .hex{width:26px;height:30px;margin-top:2px;background:var(--accent);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.cskills li:nth-child(2) .hex{background:var(--mustard, var(--accent))}
+.cskills li:nth-child(3) .hex{background:var(--umber, var(--fg))}
+.cskills h2{font-family:var(--display);font-size:var(--fs-m);font-weight:600;letter-spacing:0;line-height:1.3}
+.cskills p{color:var(--muted);margin-top:2px}
+.cskills .sig{font-size:var(--fs-s);font-family:var(--mono);letter-spacing:.02em;margin-top:6px;color:var(--fg)}
+.cskills .sig a{white-space:nowrap;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-dim)}
+.cskills .sig a:hover{border-color:var(--accent)}
+@media (max-width:900px){
+  .cards2{grid-template-columns:minmax(0,1fr)}
+  .front,.back,.cards2:hover .front,.cards2:hover .back{transform:none}
+}
+@media (prefers-reduced-motion:reduce){.ccard{transition:none}.cards2:hover .front,.cards2:hover .back{transform:rotate(-1.2deg)}.cards2:hover .back{transform:rotate(1.2deg)}}
+.nw{white-space:nowrap}

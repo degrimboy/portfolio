@@ -77,7 +77,8 @@ def img(page, name, alt, cls="", lazy=True, sizes="(max-width: 900px) 100vw, 60v
     return f'<button type="button" class="{bc}"{bs} aria-label="{esc(label)}">{tag}<span class="zoom-hint" aria-hidden="true">⤢</span></button>'
 
 PREVIEW = os.environ.get("PREVIEW") == "1"
-THEME = os.environ.get("THEME", "wallpaper")   # "cafe" = palette from the café photograph (trial)   # links point at .../index.html (for hosts without folder URLs)
+THEME = os.environ.get("THEME", "wallpaper")
+HERO = os.environ.get("HERO", "card")   # "card" = RPG character-card hero (trial)   # "cafe" = palette from the café photograph (trial)   # links point at .../index.html (for hosts without folder URLs)
 
 def L(page, target):            # link to another page, relative so it works on GitHub Pages sub-paths
     if PREVIEW: return page.root + target + "index.html" if (not target or target.endswith("/")) else page.root + target
@@ -93,6 +94,45 @@ def play(links):
     if not links: return ""
     a = "".join(f'<a href="{u}" target="_blank" rel="noopener">{t}<span class="visually-hidden"> (opens in a new tab)</span><span aria-hidden="true">↗</span></a>' for t, u in links)
     return f'<div class="play" aria-label="Where to play">{a}</div>'
+
+def card_hero(p):
+    def sig(items):
+        return " · ".join(f'<a href="{L(p, h)}">{t}</a>' for t, h in items)
+    return f'''<section class="cardhero" aria-labelledby="intro-title">
+    <canvas id="waves" aria-hidden="true"></canvas>
+    <div class="wrap cards2">
+      <article class="ccard front" aria-label="Character card, front">
+        <div class="ccard-top"><span class="label">Character</span><span class="label">Est. 2010 · Shillong</span></div>
+        <div class="ccard-art">{hero_picture(p)}</div>
+        <h1 id="intro-title" class="ccard-name">Samuel T Sawian</h1>
+        <p class="label ccard-class"><span class="nw">Senior Game Producer</span> · <span class="nw">Product Manager</span> · <span class="nw">LiveOps Lead</span></p>
+        <p class="ccard-flavour">I've been making games that people come back to every day since 2010. Every feature I build starts with a small story: a farm that has never had a rooster, a scientist searching an alien planet for a missing explorer.</p>
+      </article>
+      <article class="ccard back" aria-labelledby="stats-title">
+        <div class="ccard-top"><span class="label" id="stats-title">Stats &amp; skills</span></div>
+        <dl class="cstats">
+          <div><dt>Monthly players at FarmVille 2's peak</dt><dd>40M</dd></div>
+          <div><dt>Daily players on Bingo Bash</dt><dd>1M</dd></div>
+          <div><dt>Monthly players on Teen Patti Gold</dt><dd>4M+</dd></div>
+          <div><dt>Platforms shipped on</dt><dd>5</dd></div>
+        </dl>
+        <ul class="cskills">
+          <li>
+            <span class="hex" aria-hidden="true"></span>
+            <div><h2>Game Designer</h2><p>Systems, quests and stories that give players a reason to come back.</p><p class="sig">Signature moves: {sig([("The Amazing Rooster", "games/farmville-2/"), ("The Curious Case of Dr Nero", "games/dr-nero/"), ("Stellar Forever", "games/stellar-forever/")])}</p></div>
+          </li>
+          <li>
+            <span class="hex" aria-hidden="true"></span>
+            <div><h2>Game Producer</h2><p>Teams of 50+ across continents, from first prototype to live operations.</p><p class="sig">Signature moves: {sig([("Bingo Bash", "games/bingo-bash/"), ("FarmVille 2", "games/farmville-2/"), ("Teen Patti Gold", "games/teen-patti-gold/"), ("Gameloft", "games/gameloft/")])}</p></div>
+          </li>
+          <li>
+            <span class="hex" aria-hidden="true"></span>
+            <div><h2>Product Manager</h2><p>Roadmaps, releases and workflows for SaaS platforms and social-impact products.</p><p class="sig">Signature moves: {sig([("Dentira", "product/"), ("Recycled Earth", "product/recycled-earth/"), ("Meghalayan Age", "product/meghalayan-age/")])}</p></div>
+          </li>
+        </ul>
+      </article>
+    </div>
+  </section>'''
 
 def hero_picture(p):
     # AVIF first (about 60% smaller for this detailed photo), WebP for older browsers
@@ -341,7 +381,7 @@ def home_body(p):
     grid = "".join(f'''<a class="work-card" href="{L(p, href)}">
         <div class="blob {b}">{img(p, im, alt, sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 33vw")}</div>
         <span class="meta">{meta}</span><h3>{t}</h3><p>{d}</p></a>''' for href, im, alt, meta, t, d, b in cards)
-    return f'''<section class="hero" aria-labelledby="intro-title">
+    html = f'''<section class="hero" aria-labelledby="intro-title">
     <canvas id="waves" aria-hidden="true"></canvas>
     <div class="wrap">
       <div>
@@ -394,6 +434,12 @@ def home_body(p):
       </ul>
     </div>
   </section>'''
+    if HERO == "card":
+        import re as _re
+        # swap the photo hero for the character card, and drop the numbers band (its stats are on the card)
+        card = card_hero(p); html = _re.sub(r'<section class="hero".*?</section>', lambda m: card, html, count=1, flags=_re.S)
+        html = _re.sub(r'\s*<section class="proof".*?</section>', '', html, count=1, flags=_re.S)
+    return html
 
 # ---------- games index
 def spread(p, slug, label, title, summary, role, image, alt, b="", flip=False):

@@ -11,7 +11,7 @@
   if(getPref('sts-size') === 'large') root.classList.add('text-large');
   function motionAllowed(){ return !root.classList.contains('no-motion'); }
   var accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#57ffdc';
-  var hexMotif = document.documentElement.getAttribute('data-motif') === 'hex';
+  var hexMotif = document.documentElement.getAttribute('data-motif') === 'hex' || !!document.querySelector('.cardhero');
 
   function waves(canvas, opts){
     var ctx = canvas.getContext('2d'); if(!ctx) return;
@@ -74,6 +74,8 @@
     var zone = canvas.parentElement;
     function wake(){ runUntil = performance.now() + 5000; }
     if(zone){ zone.addEventListener('pointerenter', wake); zone.addEventListener('focusin', wake); }
+    // On phones the hex pattern is drawn once and kept still: animating it costs too much on slow processors
+    if(hexMotif && window.innerWidth < 900) return;
     function loop(t){ if(visible && motionAllowed() && t < runUntil){ last = t + (opts.t0||0); draw(last); } requestAnimationFrame(loop); }
     requestAnimationFrame(loop);
   }

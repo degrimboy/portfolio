@@ -48,15 +48,39 @@
 </header>
 <main id="main">
 
-<section class="hero" aria-labelledby="intro-title">
+<section class="cardhero" aria-labelledby="intro-title">
     <canvas id="waves" aria-hidden="true"></canvas>
-    <div class="wrap">
-      <div>
-        <h1 id="intro-title">Samuel T<br>Sawian<em>.</em></h1>
-        <p class="label tagline">Creative director · Storyteller · Forest seeker</p>
-        <p class="lede">I've been making games that people come back to every day since 2010. <span>Every feature I build starts with a small story: a farm that has never had a rooster, a scientist searching an alien planet for a missing explorer, a city's ragpickers getting their work back.</span></p>
-      </div>
-      <div class="portrait"><picture><source type="image/avif" srcset="assets/img/portrait-wallpaper-480.avif 480w, assets/img/portrait-wallpaper-800.avif 800w, assets/img/portrait-wallpaper.avif 1200w" sizes="(max-width: 900px) 100vw, 50vw"><img src="assets/img/portrait-wallpaper.webp" srcset="assets/img/portrait-wallpaper-480.webp 480w, assets/img/portrait-wallpaper-800.webp 800w, assets/img/portrait-wallpaper.webp 1200w" sizes="(max-width: 900px) 100vw, 50vw" alt="Samuel T Sawian looking up with a smile, in front of a hand-drawn jungle wallpaper" width="1200" height="1600" fetchpriority="high"></picture></div>
+    <div class="wrap cards2">
+      <article class="ccard front" aria-label="Character card, front">
+        <div class="ccard-top"><span class="label">Character</span><span class="label">Est. 2010 · Shillong</span></div>
+        <div class="ccard-art"><picture><source type="image/avif" srcset="assets/img/portrait-wallpaper-480.avif 480w, assets/img/portrait-wallpaper-800.avif 800w, assets/img/portrait-wallpaper.avif 1200w" sizes="(max-width: 900px) 100vw, 50vw"><img src="assets/img/portrait-wallpaper.webp" srcset="assets/img/portrait-wallpaper-480.webp 480w, assets/img/portrait-wallpaper-800.webp 800w, assets/img/portrait-wallpaper.webp 1200w" sizes="(max-width: 900px) 100vw, 50vw" alt="Samuel T Sawian looking up with a smile, in front of a hand-drawn jungle wallpaper" width="1200" height="1600" fetchpriority="high"></picture></div>
+        <h1 id="intro-title" class="ccard-name">Samuel T Sawian</h1>
+        <p class="label ccard-class"><span class="nw">Senior Game Producer</span> · <span class="nw">Product Manager</span> · <span class="nw">LiveOps Lead</span></p>
+        <p class="ccard-flavour">I've been making games that people come back to every day since 2010. Every feature I build starts with a small story: a farm that has never had a rooster, a scientist searching an alien planet for a missing explorer.</p>
+      </article>
+      <article class="ccard back" aria-labelledby="stats-title">
+        <div class="ccard-top"><span class="label" id="stats-title">Stats &amp; skills</span></div>
+        <dl class="cstats">
+          <div><dt>Monthly players at FarmVille 2's peak</dt><dd>40M</dd></div>
+          <div><dt>Daily players on Bingo Bash</dt><dd>1M</dd></div>
+          <div><dt>Monthly players on Teen Patti Gold</dt><dd>4M+</dd></div>
+          <div><dt>Platforms shipped on</dt><dd>5</dd></div>
+        </dl>
+        <ul class="cskills">
+          <li>
+            <span class="hex" aria-hidden="true"></span>
+            <div><h2>Game Designer</h2><p>Systems, quests and stories that give players a reason to come back.</p><p class="sig">Signature moves: <a href="games/farmville-2/">The Amazing Rooster</a> · <a href="games/dr-nero/">The Curious Case of Dr Nero</a> · <a href="games/stellar-forever/">Stellar Forever</a></p></div>
+          </li>
+          <li>
+            <span class="hex" aria-hidden="true"></span>
+            <div><h2>Game Producer</h2><p>Teams of 50+ across continents, from first prototype to live operations.</p><p class="sig">Signature moves: <a href="games/bingo-bash/">Bingo Bash</a> · <a href="games/farmville-2/">FarmVille 2</a> · <a href="games/teen-patti-gold/">Teen Patti Gold</a> · <a href="games/gameloft/">Gameloft</a></p></div>
+          </li>
+          <li>
+            <span class="hex" aria-hidden="true"></span>
+            <div><h2>Product Manager</h2><p>Roadmaps, releases and workflows for SaaS platforms and social-impact products.</p><p class="sig">Signature moves: <a href="product/">Dentira</a> · <a href="product/recycled-earth/">Recycled Earth</a> · <a href="product/meghalayan-age/">Meghalayan Age</a></p></div>
+          </li>
+        </ul>
+      </article>
     </div>
   </section>
 
@@ -91,17 +115,6 @@
         <a class="btn solid" href="games/">All games</a>
         <a class="btn" href="product/">All product work</a>
       </div>
-    </div>
-  </section>
-
-
-  <section class="proof" aria-labelledby="proof-title">
-    <h2 id="proof-title" class="visually-hidden">By the numbers</h2>
-    <div class="stats">
-      <div class="stat"><b>40M</b><span>Monthly players at FarmVille 2's peak</span></div>
-      <div class="stat"><b>1M</b><span>Daily players on Bingo Bash</span></div>
-      <div class="stat"><b>4M+</b><span>Monthly players on Teen Patti Gold</span></div>
-      <div class="stat"><b>2010</b><span>Building games since</span></div>
     </div>
   </section>
 
