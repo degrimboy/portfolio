@@ -1,0 +1,73 @@
+/* "Wallpaper" palette, from Samuel's photo against a hand-drawn jungle wallpaper:
+   cream ground, ink linework, rust and umber leaves, mustard and dusty-pink highlights. */
+:root{
+  --bg:#f3eee3;        /* wallpaper ground */
+  --surface:#e8dfcf;
+  --line:#d6c9b3;
+  --fg:#1d1714;        /* ink linework */
+  --muted:#5e5046;
+  --accent:#94461f;    /* rust leaf */
+  --accent-dim:#b07a55;
+  --umber:#36210f;     /* deep leaf shadow */
+  --cream:#f3e9d6;
+  --mustard:#d8ad2f;
+  --pink:#e8c2b2;
+  --wave:#d8ad2f;
+  color-scheme:light;
+}
+.top{background:color-mix(in srgb, var(--bg) 88%, transparent)}
+.btn.solid{color:var(--bg)}
+.btn.solid:hover{color:var(--accent)}
+.skip{color:var(--bg)}
+.hero h1 em,.mark span{color:var(--accent)}
+.blob,.work-card .blob{background:var(--surface)}
+
+/* Hero: the photograph on the left, his gaze leading to the text */
+.hero{min-height:clamp(560px, 82vh, 840px);display:flex;align-items:center}
+.hero #waves{display:none}
+.hero .wrap{width:100%;grid-template-columns:minmax(0,1fr);padding-block:clamp(56px,8vw,96px);position:static}
+.hero .wrap > div:first-child{max-width:min(540px, 44vw);margin-left:auto;position:relative;z-index:1}
+.hero .portrait{position:absolute;top:0;left:0;bottom:0;width:50%;max-width:none;aspect-ratio:auto;border-radius:0;animation:none;background:var(--surface)}
+.hero .portrait img{filter:none;object-position:55% 22%}
+.hero .portrait::after{content:"";position:absolute;inset:0;background:linear-gradient(270deg, var(--bg) 0, transparent 12%);pointer-events:none}
+@media (max-width:900px){
+  .hero{display:block;min-height:0}
+  .hero .wrap{display:flex;flex-direction:column-reverse;gap:32px;padding-block:0 48px;padding-inline:0;position:relative}
+  .hero .wrap > div:first-child{max-width:none;margin-left:0;padding-inline:var(--gut)}
+  .hero .portrait{position:relative;width:100%;aspect-ratio:4/5;max-height:72vh}
+  .hero .portrait::after{background:linear-gradient(0deg, var(--bg) 0, transparent 16%)}
+}
+
+.fair li::before{background:var(--mustard)}
+
+/* Numbers band and footer: deep umber, mustard and pink highlights */
+.proof{background:var(--umber);border:0}
+.proof .stats{background:transparent;border-color:color-mix(in srgb, var(--cream) 14%, transparent)}
+.proof .stat{border-color:color-mix(in srgb, var(--cream) 14%, transparent)}
+.proof .stat b{color:var(--cream)}
+.proof .stat span{color:var(--pink)}
+.end{background:var(--umber);border:0;--wave:#d8ad2f}
+.end .foot-top p{color:var(--cream)}
+.end .foot-top p span{color:var(--mustard)!important}
+.end .foot-links a,.end .row{color:var(--pink)}
+.end .foot-links a:hover{color:var(--mustard)}
+dialog.lb button{background:var(--bg);color:var(--fg)}
+/* contact section on the umber footer */
+.end .label{color:var(--mustard)}
+.end h2,.end .email{color:var(--cream)}
+.end .contact-note{color:var(--pink)}
+.end .btn{color:var(--cream);border-color:color-mix(in srgb, var(--cream) 40%, transparent)}
+.end .btn:hover{color:var(--mustard);border-color:var(--mustard);background:transparent}
+.end .btn.solid{background:var(--mustard);border-color:var(--mustard);color:var(--umber)}
+.end .btn.solid:hover{background:transparent;color:var(--mustard)}
+.end a:focus-visible,.end button:focus-visible{outline-color:var(--mustard)}
+/* Gameloft band on the Games page: dark, so the Avatar art reads */
+.band{background:var(--umber)}
+.band > img{opacity:.7}
+.band::after{background:linear-gradient(to top, var(--umber) 12%, color-mix(in srgb, var(--umber) 30%, transparent) 80%)}
+.band h2,.band ul,.band li{color:var(--cream)}
+.band .muted{color:var(--pink)}
+.band .label{color:var(--mustard)}
+.band .btn{color:var(--cream);border-color:color-mix(in srgb, var(--cream) 45%, transparent)}
+a.band:hover .btn{color:var(--mustard);border-color:var(--mustard)}
+@media (max-width:900px){.band > img{opacity:1}}

@@ -1,0 +1,38 @@
+/* "Café" palette, sampled from Samuel's photo: limestone walls, sage beams, espresso, latte foam, black tee.
+   Loaded after site.css; only overrides colours and the hero portrait treatment. */
+:root{
+  --bg:#efe9de;        /* limestone wall, lifted */
+  --surface:#e5dccc;   /* stone table top */
+  --line:#d3c8b5;
+  --fg:#1b1815;        /* black tee */
+  --muted:#5e564b;
+  --accent:#46614c;    /* sage beam, deepened for contrast */
+  --accent-dim:#6f826b;
+  --espresso:#2b1715;  /* coffee */
+  --foam:#ecdfcc;      /* latte foam */
+  --sage-light:#a9b9a2;
+  --wave:#46614c;
+  color-scheme:light;
+}
+.top{background:color-mix(in srgb, var(--bg) 86%, transparent)}
+.portrait img{filter:none}
+.btn.solid{color:var(--bg)}
+.btn.solid:hover{color:var(--accent)}
+.skip{color:var(--bg)}
+.hero h1 em,.mark span{color:var(--accent)}
+.blob,.work-card .blob{background:var(--surface)}
+
+/* numbers band: espresso with foam type */
+.proof{background:var(--espresso);border:0}
+.proof .stats{background:transparent;border-color:color-mix(in srgb, var(--foam) 14%, transparent)}
+.proof .stat{border-color:color-mix(in srgb, var(--foam) 14%, transparent)}
+.proof .stat b{color:var(--foam)}
+.proof .stat span{color:var(--sage-light)}
+
+/* footer: espresso */
+.end{background:var(--espresso);border:0;--wave:#a9b9a2}
+.end .foot-top p{color:var(--foam)}
+.end .foot-top p span{color:var(--sage-light)!important}
+.end .foot-links a,.end .row{color:var(--sage-light)}
+.end .foot-links a:hover{color:var(--foam)}
+dialog.lb button{background:var(--bg);color:var(--fg)}

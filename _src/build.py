@@ -53,25 +53,55 @@ class Page:
 def img(page, name, alt, cls="", lazy=True, sizes="(max-width: 900px) 100vw, 60vw", style="", hi=False):
     w, h = SIZES[f"{name}.webp"]
     r = page.root + "assets/img/"
+    variants = [(f"{name}-{v}.webp", v) for v in (480, 800) if f"{name}-{v}.webp" in SIZES]
     srcset = ""
-    if f"{name}-800.webp" in SIZES:
-        srcset = f' srcset="{r}{name}-800.webp 800w, {r}{name}.webp {w}w" sizes="{sizes}"'
+    if variants:
+        srcset = ' srcset="' + ", ".join(f"{r}{f} {v}w" for f, v in variants) + f', {r}{name}.webp {w}w" sizes="{sizes}"'
+    classes = [c for c in cls.split() if c != "zoom"]
+    zoom = "zoom" in cls.split()
+    # grid placement classes/styles belong on the button when the image is wrapped
+    wrap_cls = [c for c in classes if c in ("g-a",)]
+    img_cls = [c for c in classes if c not in wrap_cls]
+    wrap_style = style if (zoom and "grid-column" in style) else ""
+    img_style = "" if wrap_style else style
     a = [f'src="{r}{name}.webp"{srcset}', f'alt="{esc(alt)}"', f'width="{w}"', f'height="{h}"']
-    if cls: a.append(f'class="{cls}"')
-    if style: a.append(f'style="{style}"')
+    if img_cls: a.append(f'class="{" ".join(img_cls)}"')
+    if img_style: a.append(f'style="{img_style}"')
     a.append('fetchpriority="high"' if hi else ('loading="lazy" decoding="async"' if lazy else 'decoding="async"'))
-    return "<img " + " ".join(a) + ">"
+    tag = "<img " + " ".join(a) + ">"
+    if not zoom:
+        return tag
+    bc = " ".join(["zoom-btn"] + wrap_cls)
+    bs = f' style="{wrap_style}"' if wrap_style else ""
+    label = f"Enlarge image: {alt}" if alt else "Enlarge image"
+    return f'<button type="button" class="{bc}"{bs} aria-label="{esc(label)}">{tag}<span class="zoom-hint" aria-hidden="true">⤢</span></button>'
 
-PREVIEW = os.environ.get("PREVIEW") == "1"   # links point at .../index.html (for hosts without folder URLs)
+PREVIEW = os.environ.get("PREVIEW") == "1"
+THEME = os.environ.get("THEME", "wallpaper")   # "cafe" = palette from the café photograph (trial)   # links point at .../index.html (for hosts without folder URLs)
 
 def L(page, target):            # link to another page, relative so it works on GitHub Pages sub-paths
     if PREVIEW: return page.root + target + "index.html" if (not target or target.endswith("/")) else page.root + target
     return page.root + target if target else (page.root or "./")
 
+NEWTAB = '<span class="visually-hidden"> (opens in a new tab)</span><span aria-hidden="true"> ↗</span>'
+
+def ext(url, text, cls=""):
+    c = f' class="{cls}"' if cls else ""
+    return f'<a{c} href="{url}" target="_blank" rel="noopener">{text}{NEWTAB}</a>'
+
 def play(links):
     if not links: return ""
     a = "".join(f'<a href="{u}" target="_blank" rel="noopener">{t}<span class="visually-hidden"> (opens in a new tab)</span><span aria-hidden="true">↗</span></a>' for t, u in links)
     return f'<div class="play" aria-label="Where to play">{a}</div>'
+
+def hero_picture(p):
+    # AVIF first (about 60% smaller for this detailed photo), WebP for older browsers
+    r = p.root + "assets/img/"
+    sizes = "(max-width: 900px) 100vw, 50vw"
+    avif = f"{r}portrait-wallpaper-480.avif 480w, {r}portrait-wallpaper-800.avif 800w, {r}portrait-wallpaper.avif 1200w"
+    return (f'<picture><source type="image/avif" srcset="{avif}" sizes="{sizes}">'
+            + img(p, "portrait-wallpaper", "Samuel T Sawian looking up with a smile, in front of a hand-drawn jungle wallpaper", lazy=False, sizes=sizes, hi=True)
+            + "</picture>")
 
 def video(vid, title, meta):
     # Thumbnail first; the YouTube player loads only when clicked (keeps pages fast). Without JS it opens YouTube.
@@ -80,7 +110,7 @@ def video(vid, title, meta):
             <img src="https://i.ytimg.com/vi/{vid}/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
             <span class="yt-play" aria-hidden="true"></span><span class="visually-hidden">Play video: {esc(title)}</span>
           </a>
-          <figcaption><b>{esc(title)}</b><span class="meta">{meta}</span></figcaption>
+          <figcaption><b>{esc(title)}</b><span class="meta">{meta}</span><a class="yt-out" href="https://www.youtube.com/watch?v={vid}" target="_blank" rel="noopener">Watch on YouTube<span class="visually-hidden"> (opens in a new tab)</span><span aria-hidden="true"> ↗</span></a></figcaption>
         </figure>'''
 
 def facts(rows):
@@ -113,7 +143,7 @@ PERSON = {
     "email": "mailto:ssawian@gmail.com",
     "sameAs": [LINKEDIN, BLOG],
     "address": {"@type": "PostalAddress", "addressLocality": "Shillong", "addressRegion": "Meghalaya", "addressCountry": "IN"},
-    "worksFor": [{"@type": "Organization", "name": "Barking Deer Entertainment"}, {"@type": "Organization", "name": "Dentira"}],
+    "worksFor": {"@type": "Organization", "name": "Dentira"},
     "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Vancouver Film School"},
                  {"@type": "CollegeOrUniversity", "name": "National Institute of Design"},
                  {"@type": "CollegeOrUniversity", "name": "Bangalore University"}],
@@ -126,14 +156,14 @@ def person():
         p["@id"] = f"{SITE_URL}/#person"; p["url"] = f"{SITE_URL}/"; p["image"] = f"{SITE_URL}/assets/img/portrait.webp"
     return p
 
-NAV = [("Games", "games/"), ("Product", "product/"), ("About", "about/")]
+NAV = [("Games", "games/"), ("Product design", "product/"), ("About", "about/")]
 
 def head(page):
     canon = page.abs()
     og_img = f"{SITE_URL}/assets/og/{page.og}.jpg" if SITE_URL else f"{page.root}assets/og/{page.og}.jpg"
     r = page.root
     lines = [
-        "<!doctype html>", '<html lang="en-IN">', "<head>",
+        "<!doctype html>", ('<html lang="en-IN" data-motif="hex">' if THEME == "cafe" else '<html lang="en-IN">'), "<head>",
         '<meta charset="utf-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">',
         f'<base href="{SITE_URL}/">' if page.noindex and SITE_URL else "",
@@ -142,8 +172,8 @@ def head(page):
         f'<meta name="author" content="{SITE_NAME}">',
         '<meta name="robots" content="noindex">' if page.noindex else '<meta name="robots" content="index, follow, max-image-preview:large">',
         f'<link rel="canonical" href="{canon}">' if canon and not page.noindex else "",
-        '<meta name="theme-color" content="#131615">',
-        '<meta name="color-scheme" content="dark">',
+        {"cafe": '<meta name="theme-color" content="#efe9de">', "reading": '<meta name="theme-color" content="#f2efe8">', "wallpaper": '<meta name="theme-color" content="#f3eee3">'}.get(THEME, '<meta name="theme-color" content="#131615">'),
+        '<meta name="color-scheme" content="light">' if THEME else '<meta name="color-scheme" content="dark">',
         f'<link rel="icon" href="{r}favicon.ico" sizes="32x32">',
         f'<link rel="icon" href="{r}assets/favicon.svg" type="image/svg+xml">',
         f'<link rel="apple-touch-icon" href="{r}assets/apple-touch-icon.png">',
@@ -151,6 +181,7 @@ def head(page):
         f'<link rel="preload" href="{r}assets/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>',
         f'<link rel="preload" href="{r}assets/fonts/instrument-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>',
         f'<link rel="stylesheet" href="{r}assets/site.css">',
+        f'<link rel="stylesheet" href="{r}assets/theme-{THEME}.css">' if THEME else "",
         f'<meta property="og:site_name" content="{SITE_NAME}">',
         f'<meta property="og:type" content="{page.og_type}">',
         f'<meta property="og:title" content="{esc(page.title)}">',
@@ -172,45 +203,99 @@ def head(page):
     lines.append("</head>")
     return "\n".join(l for l in lines if l)
 
+def ethos_html(p):
+    # Separator between hero and selected work: the platforms Samuel has shipped games on
+    rows = [
+        ("Facebook", [("FarmVille 2", "games/farmville-2/"), ("Bingo Bash", "games/bingo-bash/")]),
+        ("iOS &amp; Android", [("Bingo Bash", "games/bingo-bash/"), ("Teen Patti Gold", "games/teen-patti-gold/"), ("Kitty Journey", ""), ("Asphalt", "games/gameloft/"), ("Assassin's Creed", "games/gameloft/"), ("Spider-Man", "games/gameloft/"), ("Avatar", "games/gameloft/")]),
+        ("PC", [("Dr Nero", "games/dr-nero/"), ("Stellar Forever", "games/stellar-forever/"), ("Die Beaver Die", "")]),
+        ("Xbox", [("Stellar Forever", "games/stellar-forever/")]),
+        ("Web", [("Teen Patti Gold", "games/teen-patti-gold/")]),
+    ]
+    cols = ""
+    for plat, games in rows:
+        items = "".join(f'<li><a href="{L(p, h)}">{g}</a></li>' if h else f'<li class="nolink">{g}</li>' for g, h in games)
+        cols += f'<div class="plat"><h3 class="label">{plat}</h3><ul>{items}</ul></div>'
+    return f'''  <section class="platforms" aria-labelledby="plat-title">
+    <div class="wrap">
+      <h2 class="label plat-title" id="plat-title">Games I've shipped, by platform</h2>
+      <div class="plats">{cols}</div>
+    </div>
+  </section>
+
+'''
+
+def settings_html():
+    return '''<button type="button" class="settings-btn" id="settingsBtn" aria-expanded="false" aria-controls="settings" aria-label="Player settings">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/><circle cx="16" cy="7" r="2.2" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="10" cy="17" r="2.2" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+      </button>
+      <div class="settings" id="settings" role="group" aria-labelledby="settingsTitle" hidden>
+        <p class="label" id="settingsTitle">Player settings</p>
+        <div class="opt"><span id="motionLbl">Motion</span><button type="button" class="switch" id="optMotion" role="switch" aria-checked="true" aria-labelledby="motionLbl"><span aria-hidden="true"></span></button></div>
+        <div class="opt"><span id="sizeLbl">Text size</span><div class="seg" role="group" aria-labelledby="sizeLbl"><button type="button" data-size="std" aria-pressed="true">Standard</button><button type="button" data-size="large" aria-pressed="false">Large</button></div></div>
+        <p class="note">Saved on this device only. Nothing is sent anywhere.</p>
+      </div>'''
+
 def header(page):
     cur = ' aria-current="page"'
     links = "".join(
-        f'<a href="{L(page, t)}"{cur if page.nav == t else ""}>{n}</a>' for n, t in NAV)
+        f'<a href="{L(page, t)}"{cur if page.nav == t else ""}>{n}</a>' for n, t in NAV) + '<a href="#contact">Contact</a>'
     return f'''<a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="{L(page, "")}" aria-label="Samuel T Sawian, home">S<span>.</span>T<span>.</span>S</a>
-    <nav class="nav" aria-label="Main">{links}</nav>
+    <a class="mark" href="{L(page, "")}" aria-label="S.T.S, Samuel T Sawian, home">S<span>.</span>T<span>.</span>S</a>
+    <div class="top-right">
+      <nav class="nav" aria-label="Main">{links}</nav>
+      
+    </div>
   </div>
 </header>'''
 
 def footer(page):
     links = "".join(f'<li><a href="{L(page, t)}">{n}</a></li>' for n, t in NAV)
-    return f'''<footer class="end">
+    return f'''<footer class="end" id="contact" aria-labelledby="contact-title">
   <canvas id="waves2" aria-hidden="true"></canvas>
   <div class="wrap foot">
-    <div class="foot-top">
-      <p>Samuel T Sawian<span style="color:var(--accent)">.</span></p>
-      <ul class="foot-links">{links}<li><a href="mailto:{EMAIL}">{EMAIL}</a></li><li><a href="{LINKEDIN}" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="{BLOG}" target="_blank" rel="noopener">Blog</a></li></ul>
+    <div class="contact">
+      <div>
+        <p class="label">Contact</p>
+        <h2 id="contact-title">Let's make something people will come back to.</h2>
+        <p class="contact-note">Write to me about roles, collaborations, or anything to do with games and stories.</p>
+      </div>
+      <div class="contact-actions">
+        <div class="email-row"><a class="email" href="mailto:{EMAIL}">{EMAIL}</a><button type="button" class="btn copy" data-copy="{EMAIL}">Copy email</button></div>
+        <div class="actions">
+          <a class="btn solid" href="{page.root}assets/docs/SamuelTSawian_Resume.pdf" download>Download résumé <span class="hint">(PDF)</span></a>
+          {ext(LINKEDIN, "LinkedIn", "btn")}
+          {ext(BLOG, "Blog", "btn")}
+        </div>
+      </div>
     </div>
-    <div class="row"><span>Shillong, India</span><span>© {YEAR} Samuel T Sawian</span></div>
+    <div class="row"><ul class="foot-links">{links}</ul><span>Shillong, India · © {YEAR} Samuel T Sawian</span></div>
   </div>
 </footer>
-<dialog class="lb" id="lb" aria-label="Image viewer">
-  <button type="button" id="lbClose">Close</button>
-  <img id="lbImg" alt="">
-  <p id="lbCap"></p>
-</dialog>'''
+'''
 
 def render(page):
+    body = page.body(page)
+    if "READ_MINUTES" in body:
+        import re as _re, math as _math
+        words = len(_re.sub(r"<[^>]+>", " ", body).split())
+        body = body.replace("READ_MINUTES", str(max(1, _math.ceil(words / 230))))
+    page._body_html = body
     return f'''{head(page)}
 <body>
 {header(page)}
 <main id="main">
 {crumbs_html(page)}
-{page.body(page)}
+{page._body_html}
 </main>
 {footer(page)}
+<dialog class="lb" id="lb" aria-label="Image viewer">
+  <button type="button" id="lbClose">Close</button>
+  <img id="lbImg" alt="">
+  <p id="lbCap"></p>
+</dialog>
 </body>
 </html>
 '''
@@ -246,12 +331,12 @@ def next_links(page, items, section):
 # ---------- home
 def home_body(p):
     cards = [
-        ("games/bingo-bash/", "bingo", "Bingo Bash key art", "GSN Games · Social casino", "Bingo Bash", "The world's #1 free-to-play bingo game, acquired by GSN for $165M.", ""),
-        ("games/farmville-2/", "farmville", "FarmVille 2 farm scene", "Zynga · Simulation", "FarmVille 2", "Led the content team for a game that peaked at 40M monthly players.", "b2"),
-        ("games/teen-patti-gold/", "teenpatti", "Teen Patti Gold card table", "Moonfrog Labs · Card game", "Teen Patti Gold", "A top-grossing three-card game with more than 4M monthly players.", "b3"),
-        ("games/dr-nero/", "nero-1", "Dr Nero isometric jungle", "Serious game · RPG", "The Curious Case of Dr Nero", "An RPG that teaches research scientists to collaborate.", "b2"),
-        ("product/recycled-earth/", "re-challenge", "Women sorting plastic waste", "UX · Branding · Android", "Recycled Earth", "Waste collection that put Mumbai's ragpickers back to work. Featured by UNICEF.", ""),
-        ("product/meghalayan-age/", "ma-box", "Lakadong turmeric premium packaging", "Brand · Packaging", "Meghalayan Age", "Brand and packaging for Meghalaya's finest produce.", "b3"),
+        ("games/bingo-bash/", "bingo", "Bingo Bash key art", "GSN Games · Social casino", "Bingo Bash", "A room full of strangers, a caller, and the hope that the next number is yours.", ""),
+        ("games/farmville-2/", "farmville", "FarmVille 2 farm scene", "Zynga · Simulation", "FarmVille 2", "Forty million farmers, and the first rooster in FarmVille's history.", "b2"),
+        ("games/teen-patti-gold/", "teenpatti", "Teen Patti Gold card table", "Moonfrog Labs · Card game", "Teen Patti Gold", "The card game of Indian family gatherings, carried onto phones.", "b3"),
+        ("games/dr-nero/", "nero-1", "Dr Nero isometric jungle", "Serious game · RPG", "The Curious Case of Dr Nero", "How do you teach scientists to share? Send them to an alien planet.", "b2"),
+        ("product/recycled-earth/", "re-challenge", "Women sorting plastic waste", "UX · Branding · Android", "Recycled Earth", "When Mumbai changed how it collected rubbish, its ragpickers lost their work. This gave it back.", ""),
+        ("product/meghalayan-age/", "ma-box", "Lakadong turmeric premium packaging", "Brand · Packaging", "Meghalayan Age", "Turmeric with the highest curcumin in the world deserved a brand to match.", "b3"),
     ]
     grid = "".join(f'''<a class="work-card" href="{L(p, href)}">
         <div class="blob {b}">{img(p, im, alt, sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 33vw")}</div>
@@ -264,10 +349,11 @@ def home_body(p):
         <p class="label tagline">Creative director · Storyteller · Forest seeker</p>
         <p class="lede">I've been making games that people come back to every day since 2010. <span>Every feature I build starts with a small story: a farm that has never had a rooster, a scientist searching an alien planet for a missing explorer, a city's ragpickers getting their work back.</span></p>
       </div>
-      <div class="portrait">{img(p, "portrait", "Black and white portrait of Samuel T Sawian seated by a window", lazy=False, sizes="(max-width: 900px) 300px, 380px", hi=True)}</div>
+      <div class="portrait">{hero_picture(p) if THEME == "wallpaper" else img(p, "portrait-reading", "Samuel T Sawian reading in an armchair by a sunlit window", lazy=False, sizes="(max-width: 900px) 100vw, 50vw", hi=True) if THEME == "reading" else img(p, "portrait-cafe", "Samuel T Sawian smiling over coffee at a café table", lazy=False, sizes="(max-width: 900px) 300px, 380px", hi=True) if THEME == "cafe" else img(p, "portrait", "Black and white portrait of Samuel T Sawian seated by a window", lazy=False, sizes="(max-width: 900px) 300px, 380px", hi=True)}</div>
     </div>
   </section>
 
+{ethos_html(p) if THEME in ("cafe", "reading", "wallpaper") else ""}
   <section class="section" aria-labelledby="work-title">
     <div class="wrap">
       <div class="section-head">
@@ -286,9 +372,9 @@ def home_body(p):
   <section class="proof" aria-labelledby="proof-title">
     <h2 id="proof-title" class="visually-hidden">By the numbers</h2>
     <div class="stats">
-      <div class="stat"><b>40M</b><span>Monthly active users at FarmVille 2's peak</span></div>
-      <div class="stat"><b>1M</b><span>Daily active users on Bingo Bash</span></div>
-      <div class="stat"><b>$165M</b><span>Bingo Bash studio acquisition by GSN</span></div>
+      <div class="stat"><b>40M</b><span>Monthly players at FarmVille 2's peak</span></div>
+      <div class="stat"><b>1M</b><span>Daily players on Bingo Bash</span></div>
+      <div class="stat"><b>4M+</b><span>Monthly players on Teen Patti Gold</span></div>
       <div class="stat"><b>2010</b><span>Building games since</span></div>
     </div>
   </section>
@@ -301,10 +387,10 @@ def home_body(p):
         <div class="lead prose"><p>Senior Producer and Product Manager, running live, free-to-play games and digital products end-to-end since 2010. I lead distributed, multi-disciplinary teams — engineering, QA, art, sound, localisation — through full production pipelines, using Agile and Waterfall to keep delivery on track. My background also spans LiveOps and post-launch optimisation on high-revenue titles.</p><p>On weekends, you'll find me foraging for lost stories, old forests, and forgotten places.</p></div>
         <div class="actions" style="margin-top:28px"><a class="btn" href="{L(p, "about/")}">Experience, awards &amp; talks</a></div>
       </div>
-      <ul class="roles" aria-label="Current roles">
+      <ul class="roles" aria-label="Recent roles">
         <li><b>Product Manager</b><span>Dentira · Apr 2025 – present</span></li>
-        <li><b>CEO &amp; Co-founder</b><span>Barking Deer Entertainment · 2018 – present</span></li>
         <li><b>Visiting Faculty</b><span>National Institute of Design · 2024 – 2025</span></li>
+        <li><b>CEO &amp; Co-founder</b><span>Barking Deer Entertainment · 2018 – 2025</span></li>
       </ul>
     </div>
   </section>'''
@@ -505,7 +591,7 @@ def farmville_body(p):
         {video("3iTk1hW5USY", "Get the Amazing Rooster! (FarmVille 2)", "Official trailer · FarmVille 2")}
         {video("jzISFSoFQ7I", "FarmVille 2 ep. 128: The hunt for Rooster Eggs", "Gameplay · Player video by Gao AsaurusG")}
       </div>
-      <p class="meta"><a href="https://farmville2.fandom.com/wiki/Rooster_Coop" target="_blank" rel="noopener" style="color:inherit">Rooster Coop on the FarmVille 2 wiki ↗</a></p>
+      <p class="meta">{ext("https://farmville2.fandom.com/wiki/Rooster_Coop", "Rooster Coop on the FarmVille 2 wiki")}</p>
     </section>
   </div>
   {next_links(p, GAMES, "games")}'''
@@ -893,7 +979,7 @@ def about_body(p):
           <h2 class="col-head">Experience</h2>
           <ol class="timeline">
             <li><span class="when">Apr 2025 – Present</span><span class="role">Product Manager</span><span class="where">Dentira</span><span class="what">Own live delivery for a workflow-driven SaaS platform: roadmap, sprints and releases, and features across approvals, integrations and automation.</span></li>
-            <li><span class="when">Jul 2018 – Present</span><span class="role">CEO &amp; Co-founder</span><span class="where">Barking Deer Entertainment</span><span class="what">A design-led studio making games, products and cultural platforms. Creative direction, production planning and end-to-end delivery.</span></li>
+            <li><span class="when">Jul 2018 – Apr 2025</span><span class="role">CEO &amp; Co-founder</span><span class="where">Barking Deer Entertainment</span><span class="what">A design-led studio making games, products and cultural platforms. Creative direction, production planning and end-to-end delivery.</span></li>
             <li><span class="when">Jan 2024 – Jan 2025</span><span class="role">Visiting Faculty</span><span class="where">National Institute of Design</span><span class="what">Taught the foundations of game mechanics and level design. Mentored final-semester diploma projects and sat on graduation juries.</span></li>
             <li><span class="when">Mar 2023 – Nov 2024</span><span class="role">Business Consultant</span><span class="where">PRIME Entrepreneurship Meghalaya, Government of Meghalaya</span><span class="what">Jury member for the Top 100 Meghalaya Startups 2024, one-to-one mentor for the startup incubator, and workshops on the art of pitching.</span></li>
             <li><span class="when">Apr 2017 – Oct 2017</span><span class="role">Game Producer, <a href="{L(p, "games/teen-patti-gold/")}">Teen Patti Gold</a></span><span class="where">Moonfrog Labs</span><span class="what">VIP subscription features, retention systems, and a web version launched with an external team.</span></li>
@@ -943,8 +1029,9 @@ def about_body(p):
             <ul class="awards">
               <li><b><a href="mailto:{EMAIL}">{EMAIL}</a></b><span>Email</span></li>
               <li><b>How a serious game transformed a business</b><span>Publication</span></li>
-              <li><b><a href="{BLOG}" target="_blank" rel="noopener">samuelsawian.substack.com</a></b><span>Blog</span></li>
-              <li><b><a href="{LINKEDIN}" target="_blank" rel="noopener">linkedin.com/in/samuelsawian</a></b><span>LinkedIn</span></li>
+              <li><b>{ext(BLOG, "samuelsawian.substack.com")}</b><span>Blog</span></li>
+              <li><b>{ext(LINKEDIN, "linkedin.com/in/samuelsawian")}</b><span>LinkedIn</span></li>
+              <li><b><a href="{p.root}assets/docs/SamuelTSawian_Resume.pdf" download>Download résumé (PDF)</a></b><span>Résumé</span></li>
             </ul>
           </div>
         </div>
@@ -980,7 +1067,7 @@ def webpage_ld(page, kind="WebPage", extra=None):
 # ------------------------------------------------------------------ pages
 HOME_C = [("Home", "")]
 G = HOME_C + [("Games", "games/")]
-P = HOME_C + [("Product", "product/")]
+P = HOME_C + [("Product design", "product/")]
 
 def build_pages():
     pages = []
@@ -1046,6 +1133,7 @@ def main():
     os.makedirs(os.path.join(OUT, "assets"), exist_ok=True)
     open(os.path.join(OUT, "assets", "site.css"), "w").write(css)
     shutil.copy(os.path.join(SRC, "base.js"), os.path.join(OUT, "assets", "site.js"))
+    for t in ("cafe", "reading", "wallpaper"): shutil.copy(os.path.join(SRC, f"theme-{t}.css"), os.path.join(OUT, "assets", f"theme-{t}.css"))
     if OUT != ROOT:
         for d in ("assets/img", "assets/og", "assets/fonts"):
             shutil.copytree(os.path.join(ROOT, d), os.path.join(OUT, d), dirs_exist_ok=True)

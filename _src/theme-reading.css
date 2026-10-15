@@ -1,0 +1,55 @@
+/* "Reading room" palette, from Samuel's photo by the window: white armchair and wall, navy tee,
+   oak floor, the glow of a brass lamp, leaves outside. The photo itself is the hero. */
+:root{
+  --bg:#f2efe8;        /* armchair and lit wall */
+  --surface:#e7e1d5;
+  --line:#d4ccbd;
+  --fg:#1b1e26;        /* navy-black */
+  --muted:#58554f;
+  --accent:#8a4b1f;    /* oak floor */
+  --accent-dim:#a77650;
+  --navy:#232b3d;      /* tee */
+  --foam:#efe7d8;
+  --lamp:#d8b468;      /* brass lamp glow */
+  --leaf:#4f6b33;      /* leaves through the window */
+  --wave:#d8b468;
+  color-scheme:light;
+}
+.top{background:color-mix(in srgb, var(--bg) 88%, transparent)}
+.btn.solid{color:var(--bg)}
+.btn.solid:hover{color:var(--accent)}
+.skip{color:var(--bg)}
+.hero h1 em,.mark span{color:var(--accent)}
+.blob,.work-card .blob{background:var(--surface)}
+
+/* Hero: the photograph, full height, edge to edge on the right */
+.hero{min-height:clamp(560px, 80vh, 820px);display:flex;align-items:center}
+.hero #waves{display:none}
+.hero .wrap{width:100%;grid-template-columns:minmax(0,1fr);padding-block:clamp(56px,8vw,96px);position:static}
+.hero .wrap > div:first-child{max-width:min(520px, 46vw);position:relative;z-index:1}
+.hero .portrait{position:absolute;top:0;right:0;bottom:0;width:50%;max-width:none;aspect-ratio:auto;border-radius:0;animation:none;background:var(--surface)}
+.hero .portrait img{filter:none;object-position:42% 40%}
+.hero .portrait::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg, var(--bg) 0, transparent 14%);pointer-events:none}
+@media (max-width:900px){
+  .hero{display:block;min-height:0}
+  .hero .wrap{display:flex;flex-direction:column-reverse;gap:32px;padding-block:0 48px;padding-inline:0;position:relative}
+  .hero .wrap > div:first-child{max-width:none;padding-inline:var(--gut)}
+  .hero .portrait{position:relative;width:100%;aspect-ratio:4/5;max-height:72vh}
+  .hero .portrait::after{background:linear-gradient(0deg, var(--bg) 0, transparent 18%)}
+}
+
+/* Fair play bullets in leaf green */
+.fair li::before{background:var(--leaf)}
+
+/* Numbers band and footer: navy, with lamp-light accents */
+.proof{background:var(--navy);border:0}
+.proof .stats{background:transparent;border-color:color-mix(in srgb, var(--foam) 14%, transparent)}
+.proof .stat{border-color:color-mix(in srgb, var(--foam) 14%, transparent)}
+.proof .stat b{color:var(--foam)}
+.proof .stat span{color:var(--lamp)}
+.end{background:var(--navy);border:0;--wave:#d8b468}
+.end .foot-top p{color:var(--foam)}
+.end .foot-top p span{color:var(--lamp)!important}
+.end .foot-links a,.end .row{color:color-mix(in srgb, var(--foam) 78%, var(--navy))}
+.end .foot-links a:hover{color:var(--lamp)}
+dialog.lb button{background:var(--bg);color:var(--fg)}

@@ -374,5 +374,45 @@
 "fv-rooster-coop.webp": [
 371,
 333
+],
+"portrait-cafe.webp": [
+1000,
+1250
+],
+"portrait-cafe-800.webp": [
+800,
+1000
+],
+"portrait-reading.webp": [
+1200,
+1600
+],
+"portrait-reading-800.webp": [
+800,
+1067
+],
+"portrait-wallpaper.webp": [
+1200,
+1600
+],
+"portrait-wallpaper-800.webp": [
+800,
+1067
+],
+"portrait-wallpaper-480.webp": [
+480,
+640
+],
+"portrait-480.webp": [
+480,
+721
+],
+"portrait-reading-480.webp": [
+480,
+640
+],
+"portrait-cafe-480.webp": [
+480,
+600
 ]
 }

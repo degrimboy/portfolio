@@ -8,8 +8,8 @@
 <meta name="author" content="Samuel T Sawian">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://degrimboy.github.io/portfolio/games/stellar-forever/">
-<meta name="theme-color" content="#131615">
-<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#f3eee3">
+<meta name="color-scheme" content="light">
 <link rel="icon" href="../../favicon.ico" sizes="32x32">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
@@ -17,6 +17,7 @@
 <link rel="preload" href="../../assets/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../assets/fonts/instrument-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/theme-wallpaper.css">
 <meta property="og:site_name" content="Samuel T Sawian">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Stellar Forever | Game Designer | Samuel T Sawian">
@@ -38,8 +39,11 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="../../" aria-label="Samuel T Sawian, home">S<span>.</span>T<span>.</span>S</a>
-    <nav class="nav" aria-label="Main"><a href="../../games/" aria-current="page">Games</a><a href="../../product/">Product</a><a href="../../about/">About</a></nav>
+    <a class="mark" href="../../" aria-label="S.T.S, Samuel T Sawian, home">S<span>.</span>T<span>.</span>S</a>
+    <div class="top-right">
+      <nav class="nav" aria-label="Main"><a href="../../games/" aria-current="page">Games</a><a href="../../product/">Product design</a><a href="../../about/">About</a><a href="#contact">Contact</a></nav>
+      
+    </div>
   </div>
 </header>
 <main id="main">
@@ -52,7 +56,7 @@
       <dl class="facts"><dt>Role</dt><dd>Game Designer &amp; Programmer</dd><dt>Genre</dt><dd>RPG side-scrolling brawler</dd><dt>Platform</dt><dd>PC, Xbox</dd></dl>
       
     </div>
-    <div class="p-media"><div class="blob b2"><img src="../../assets/img/stellar.webp" alt="Stellar Forever: the heroine fights a giant Octosaurus Rex" width="700" height="525" class="zoom" fetchpriority="high"></div></div>
+    <div class="p-media"><div class="blob b2"><button type="button" class="zoom-btn" aria-label="Enlarge image: Stellar Forever: the heroine fights a giant Octosaurus Rex"><img src="../../assets/img/stellar.webp" alt="Stellar Forever: the heroine fights a giant Octosaurus Rex" width="700" height="525" fetchpriority="high"><span class="zoom-hint" aria-hidden="true">⤢</span></button></div></div>
   </header>
   <div class="wrap page-body">
     <section class="cols">
@@ -67,14 +71,14 @@
             <img src="https://i.ytimg.com/vi/L5y-jxZg7fs/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
             <span class="yt-play" aria-hidden="true"></span><span class="visually-hidden">Play video: Stellar Forever trailer</span>
           </a>
-          <figcaption><b>Stellar Forever trailer</b><span class="meta">Gameplay trailer</span></figcaption>
+          <figcaption><b>Stellar Forever trailer</b><span class="meta">Gameplay trailer</span><a class="yt-out" href="https://www.youtube.com/watch?v=L5y-jxZg7fs" target="_blank" rel="noopener">Watch on YouTube<span class="visually-hidden"> (opens in a new tab)</span><span aria-hidden="true"> ↗</span></a></figcaption>
         </figure>
         <figure class="video">
           <a class="yt" href="https://www.youtube.com/watch?v=r4likTtedFY" data-yt="r4likTtedFY" data-title="The Blast Light: Stellar Forever" target="_blank" rel="noopener">
             <img src="https://i.ytimg.com/vi/r4likTtedFY/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
             <span class="yt-play" aria-hidden="true"></span><span class="visually-hidden">Play video: The Blast Light: Stellar Forever</span>
           </a>
-          <figcaption><b>The Blast Light: Stellar Forever</b><span class="meta">Media spotlight · Vancouver Film School</span></figcaption>
+          <figcaption><b>The Blast Light: Stellar Forever</b><span class="meta">Media spotlight · Vancouver Film School</span><a class="yt-out" href="https://www.youtube.com/watch?v=r4likTtedFY" target="_blank" rel="noopener">Watch on YouTube<span class="visually-hidden"> (opens in a new tab)</span><span aria-hidden="true"> ↗</span></a></figcaption>
         </figure>
       </div>
     </section>
@@ -84,16 +88,28 @@
   <a href="../../games/"><span class="label">Next</span><b>All games</b></a>
 </nav>
 </main>
-<footer class="end">
+<footer class="end" id="contact" aria-labelledby="contact-title">
   <canvas id="waves2" aria-hidden="true"></canvas>
   <div class="wrap foot">
-    <div class="foot-top">
-      <p>Samuel T Sawian<span style="color:var(--accent)">.</span></p>
-      <ul class="foot-links"><li><a href="../../games/">Games</a></li><li><a href="../../product/">Product</a></li><li><a href="../../about/">About</a></li><li><a href="mailto:ssawian@gmail.com">ssawian@gmail.com</a></li><li><a href="https://www.linkedin.com/in/samuelsawian" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://samuelsawian.substack.com/" target="_blank" rel="noopener">Blog</a></li></ul>
+    <div class="contact">
+      <div>
+        <p class="label">Contact</p>
+        <h2 id="contact-title">Let's make something people will come back to.</h2>
+        <p class="contact-note">Write to me about roles, collaborations, or anything to do with games and stories.</p>
+      </div>
+      <div class="contact-actions">
+        <div class="email-row"><a class="email" href="mailto:ssawian@gmail.com">ssawian@gmail.com</a><button type="button" class="btn copy" data-copy="ssawian@gmail.com">Copy email</button></div>
+        <div class="actions">
+          <a class="btn solid" href="../../assets/docs/SamuelTSawian_Resume.pdf" download>Download résumé <span class="hint">(PDF)</span></a>
+          <a class="btn" href="https://www.linkedin.com/in/samuelsawian" target="_blank" rel="noopener">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span><span aria-hidden="true"> ↗</span></a>
+          <a class="btn" href="https://samuelsawian.substack.com/" target="_blank" rel="noopener">Blog<span class="visually-hidden"> (opens in a new tab)</span><span aria-hidden="true"> ↗</span></a>
+        </div>
+      </div>
     </div>
-    <div class="row"><span>Shillong, India</span><span>© 2026 Samuel T Sawian</span></div>
+    <div class="row"><ul class="foot-links"><li><a href="../../games/">Games</a></li><li><a href="../../product/">Product design</a></li><li><a href="../../about/">About</a></li></ul><span>Shillong, India · © 2026 Samuel T Sawian</span></div>
   </div>
 </footer>
+
 <dialog class="lb" id="lb" aria-label="Image viewer">
   <button type="button" id="lbClose">Close</button>
   <img id="lbImg" alt="">
