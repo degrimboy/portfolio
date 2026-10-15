@@ -277,3 +277,4 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation:none
 
 .party-stats{margin-top:6px;padding-top:16px;border-top:1px solid var(--line)}
 .cskills li:first-child{border-top:0;padding-top:4px}
+.about-hero .portrait img{filter:none}

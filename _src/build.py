@@ -1005,7 +1005,7 @@ def about_body(p):
       <h1 style="margin-top:14px">About</h1>
       <div class="lead prose"><p>Senior Producer and Product Manager, running live, free-to-play games and digital products end-to-end since 2010. I lead distributed, multi-disciplinary teams — engineering, QA, art, sound, localisation — through full production pipelines, using Agile and Waterfall to keep delivery on track. My background also spans LiveOps and post-launch optimisation on high-revenue titles.</p><p>On weekends, you'll find me foraging for lost stories, old forests, and forgotten places.</p></div>
     </div>
-    <div class="portrait">{img(p, "portrait", "Black and white portrait of Samuel T Sawian seated by a window", lazy=False, sizes="(max-width: 900px) 280px, 340px", hi=True)}</div>
+    <div class="portrait">{img(p, "portrait-cafe", "Samuel T Sawian smiling over coffee at a café table", lazy=False, sizes="(max-width: 900px) 280px, 340px", hi=True)}</div>
   </section>
   <section class="section" style="padding-top:0">
     <div class="wrap">
