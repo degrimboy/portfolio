@@ -109,27 +109,29 @@ def card_hero(p):
         <p class="ccard-flavour">I've been making games that people come back to every day since 2010. Every feature I build starts with a small story: a farm that has never had a rooster, a scientist searching an alien planet for a missing explorer.</p>
       </article>
       <article class="ccard back" aria-labelledby="stats-title">
-        <div class="ccard-top"><span class="label" id="stats-title">Stats &amp; skills</span></div>
+        <div class="ccard-top"><span class="label" id="stats-title">Skills &amp; party stats</span></div>
+        <div class="party"><h2 class="party-title">Skills</h2><p>What I bring to the party.</p></div>
+        <ul class="cskills">
+          <li>
+            <span class="hex" aria-hidden="true"></span>
+            <div><h3>Game Designer</h3><p>Systems, quests and stories that give players a reason to come back.</p><p class="sig">Signature moves: {sig([("The Amazing Rooster", "games/farmville-2/"), ("The Curious Case of Dr Nero", "games/dr-nero/"), ("Stellar Forever", "games/stellar-forever/")])}</p></div>
+          </li>
+          <li>
+            <span class="hex" aria-hidden="true"></span>
+            <div><h3>Game Producer</h3><p>Teams of 50+ across continents, from first prototype to live operations.</p><p class="sig">Signature moves: {sig([("Bingo Bash", "games/bingo-bash/"), ("FarmVille 2", "games/farmville-2/"), ("Teen Patti Gold", "games/teen-patti-gold/"), ("Gameloft", "games/gameloft/")])}</p></div>
+          </li>
+          <li>
+            <span class="hex" aria-hidden="true"></span>
+            <div><h3>Product Manager</h3><p>Roadmaps, releases and workflows for SaaS platforms and social-impact products.</p><p class="sig">Signature moves: {sig([("Dentira", "product/"), ("Recycled Earth", "product/recycled-earth/"), ("Meghalayan Age", "product/meghalayan-age/")])}</p></div>
+          </li>
+        </ul>
+        <div class="party party-stats"><h2 class="party-title">Party stats</h2><p>Results from games I helped build with some brilliant teams.</p></div>
         <dl class="cstats">
           <div><dt>Monthly players at FarmVille 2's peak</dt><dd>40M</dd></div>
           <div><dt>Daily players on Bingo Bash</dt><dd>1M</dd></div>
           <div><dt>Monthly players on Teen Patti Gold</dt><dd>4M+</dd></div>
           <div><dt>Platforms shipped on</dt><dd>5</dd></div>
         </dl>
-        <ul class="cskills">
-          <li>
-            <span class="hex" aria-hidden="true"></span>
-            <div><h2>Game Designer</h2><p>Systems, quests and stories that give players a reason to come back.</p><p class="sig">Signature moves: {sig([("The Amazing Rooster", "games/farmville-2/"), ("The Curious Case of Dr Nero", "games/dr-nero/"), ("Stellar Forever", "games/stellar-forever/")])}</p></div>
-          </li>
-          <li>
-            <span class="hex" aria-hidden="true"></span>
-            <div><h2>Game Producer</h2><p>Teams of 50+ across continents, from first prototype to live operations.</p><p class="sig">Signature moves: {sig([("Bingo Bash", "games/bingo-bash/"), ("FarmVille 2", "games/farmville-2/"), ("Teen Patti Gold", "games/teen-patti-gold/"), ("Gameloft", "games/gameloft/")])}</p></div>
-          </li>
-          <li>
-            <span class="hex" aria-hidden="true"></span>
-            <div><h2>Product Manager</h2><p>Roadmaps, releases and workflows for SaaS platforms and social-impact products.</p><p class="sig">Signature moves: {sig([("Dentira", "product/"), ("Recycled Earth", "product/recycled-earth/"), ("Meghalayan Age", "product/meghalayan-age/")])}</p></div>
-          </li>
-        </ul>
       </article>
     </div>
   </section>'''
@@ -258,7 +260,7 @@ def ethos_html(p):
         cols += f'<div class="plat"><h3 class="label">{plat}</h3><ul>{items}</ul></div>'
     return f'''  <section class="platforms" aria-labelledby="plat-title">
     <div class="wrap">
-      <h2 class="label plat-title" id="plat-title">Games I've shipped, by platform</h2>
+      <h2 class="label plat-title" id="plat-title">Games I've helped ship, by platform</h2>
       <div class="plats">{cols}</div>
     </div>
   </section>
@@ -1181,7 +1183,7 @@ def main():
     shutil.copy(os.path.join(SRC, "base.js"), os.path.join(OUT, "assets", "site.js"))
     for t in ("cafe", "reading", "wallpaper"): shutil.copy(os.path.join(SRC, f"theme-{t}.css"), os.path.join(OUT, "assets", f"theme-{t}.css"))
     if OUT != ROOT:
-        for d in ("assets/img", "assets/og", "assets/fonts"):
+        for d in ("assets/img", "assets/og", "assets/fonts", "assets/docs"):
             shutil.copytree(os.path.join(ROOT, d), os.path.join(OUT, d), dirs_exist_ok=True)
         for f in ("assets/favicon.svg", "assets/apple-touch-icon.png", "assets/icon-192.png", "assets/icon-512.png", "favicon.ico"):
             shutil.copy(os.path.join(ROOT, f), os.path.join(OUT, f))
